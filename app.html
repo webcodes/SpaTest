@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test SPA</title>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-debug.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+	<script type="text/javascript" src="scripts/ko-postbox.min.js"></script>
+</head>
+<body>
+	<div>
+	<label for="firstName">First Name : </label>
+	<input type ="text" id="firstName" data-bind="value: firstName, valueUpdate: 'afterkeydown'"/>
+
+	<label for="lastName">Last Name : </label>
+	<input type ="text" id="lastName" data-bind="value: lastName, valueUpdate: 'afterkeydown'"/>
+	
+	<label for="gender">Gender : </label>
+	<input type ="text" id="gender" data-bind="value: gender"/>
+	</div>
+
+	<div>
+	<span>The full name is <span data-bind="text:fullName"></span></span>
+	</div>
+
+	<div data-bind="component: {template: 'details', observes: [{name: 'fullName', value: fullName}]}"></div>
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js" data-main="scripts/app"></script>
+	
+</body>
+</html>
