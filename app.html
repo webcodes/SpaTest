@@ -2,30 +2,53 @@
 <html>
 <head>
 	<title>Test SPA</title>
+	<link rel="stylesheet" type="text/css" href="contents/site.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-debug.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
 	<script type="text/javascript" src="scripts/ko-postbox.min.js"></script>
 </head>
 <body>
-	<div>
-	<label for="firstName">First Name : </label>
-	<input type ="text" id="firstName" data-bind="value: firstName, valueUpdate: 'afterkeydown'"/>
+	<section>
+		<div id="topbar">
+			<a href="/app.html" class="logo"></a>
+			<h1>Spa Test</h1>
+			<div class="searchbar">
+				<input type="text" name="searchfield" class="searchfield" placeholder ="search here"/>
+				<button class="fa fa-search"></button>
+			</div>
+		</div>
+	</section>
+	<section>
+		<nav class="sidebar">
+			<ul>
+				<li><i class="fa fa-home" style="color:#ccc;"></i><a href="/app.html">Home</a></li>
+				<li><a href="/app.html">About</a></li>
+			</ul>
+		</nav>
+		<div class="contents">
+			<div>
+			<label for="firstName">First Name : </label>
+			<input type ="text" id="firstName" data-bind="value: firstName, valueUpdate: 'afterkeydown'"/>
 
-	<label for="lastName">Last Name : </label>
-	<input type ="text" id="lastName" data-bind="value: lastName, valueUpdate: 'afterkeydown'"/>
-	
-	<label for="gender">Gender : </label>
-	<input type ="text" id="gender" data-bind="value: gender"/>
-	</div>
+			<label for="lastName">Last Name : </label>
+			<input type ="text" id="lastName" data-bind="value: lastName, valueUpdate: 'afterkeydown'"/>
+			
+			<label for="gender">Gender : </label>
+			<input type ="text" id="gender" data-bind="value: gender"/>
+			</div>
 
-	<div>
-	<span>The full name is <span data-bind="text:fullName"></span></span>
-	</div>
+			<div>
+			<span>The full name is <span data-bind="text:fullName"></span></span>
+			</div>
 
-	<div data-bind="component: {template: 'details', observes: [{name: 'fullName', value: fullName}]}"></div>
+			<div class="component" data-bind="component: {template: 'details', observes: [{name: 'fullName', value: fullName}]}"></div>
+		</div>		
+	</section>
 
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js" data-main="scripts/app"></script>
-	
+
 </body>
 </html>

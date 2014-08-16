@@ -1,0 +1,78 @@
+body {
+	background: rgba(0,0,0,0.05);
+	margin:0;
+	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+	font-weight: normal;
+}
+ul, ol, dl {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	list-style-image: none;
+}
+#topbar {
+	font-weight: bold;
+	background-color: #2980b9;
+	color:#fff;
+}
+#topbar .logo {
+	background-image: url(images/logo.png);
+	display:inline-block;
+	width: 48px;
+	height: 48px;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+#topbar h1 {
+	display: inline-block;
+	padding: 10px;
+	margin: 0;
+	vertical-align: top;
+}
+#topbar .searchbar {
+	display: inline-block;
+	float: right;
+}
+.searchbar input, .searchbar button{
+	font-size: .9em;
+}
+input.searchfield {
+	min-width: 200px;
+}
+.sidebar {
+	background-color: rgb(52,49,49);
+	cursor: pointer;
+	display: inline-block;
+	max-width: 200px;
+	color: #b3b3b3;
+}
+.sidebar ul li {
+	padding: 10px 20px;
+}
+.sidebar ul li:hover {
+	background-color: rgb(78,74,74);
+}
+.sidebar ul li a, .sidebar ul li a:link, .sidebar ul li a:visited, .sidebar ul li a:hover, .sidebar ul li a:active {
+	display: inline-block;
+	padding: .2em;
+	font-size: 90%;
+	text-decoration: none;
+	color: #b3b3b3;
+}
+.contents {
+	max-width: 1000px;
+	min-width: 1000px;
+	background-color: #fff;
+	display:inline-block;
+	padding: 10px 20px;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+.clear {
+	clear: both;
+}
+.component {
+	margin-top: 1em;
+	border-top: 1px dotted #ccc;
+	padding: .3em 0;
+}
