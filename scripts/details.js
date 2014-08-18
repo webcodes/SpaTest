@@ -1,23 +1,12 @@
 define(function(){
-	//private
-	// var findPropertyByName = function(observables, propName){
-	// 	ko.unwrap(observables);
-	// 	var matches = $.grep(observables, function(observable, index){
-	// 		return observable.name === propName;
-	// 	});
-	// 	if (matches && matches.length > 0) {
-	// 		return matches[0];
-	// 	}
-	// 	else return null;
-	// };
-	var vm = function(pModel, observables){
+	var vm = function(pModel){
 		this.parentModel = pModel;	//POJO
 		this.age = ko.observable();
-		this.fullName = ko.observable().subscribeTo("FULLNAMECHANGED");
-		// var fullName = findPropertyByName(observables,'fullName');
-		// this.fullNameComp = ko.computed(function(){
-		// 	return fullName.value();
-		// });
+		this.fullNameChild = ko.observable().subscribeTo("FULLNAMECHANGED");
+		this.genderChild = ko.observable().subscribeTo("GENDERCHANGED");
+		this.gender = ko.computed(function(){
+			return ko.unwrap(this.parentModel.gender) || "gender property is not available on parentModel";
+		}, this);
 	};
 	return {
 		ViewModel : vm

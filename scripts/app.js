@@ -8,7 +8,9 @@ define(function(require) {
 	var viewModel = {
 		firstName : ko.observable(''),
 		lastName : ko.observable(''),
-		gender : ko.observable()
+		genderList : ['Male', 'Female'],
+		sex : ko.observable().publishOn("GENDERCHANGED"),
+		age: ko.observable().publishOn("AGECHANGED")
 	};
 	viewModel.fullName = ko.computed(function() {
 		return viewModel.firstName() + ' ' + viewModel.lastName();

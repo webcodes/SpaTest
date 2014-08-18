@@ -1,0 +1,22 @@
+<section name="connections">
+	<table>
+		<thead>
+			<tr>
+				<th>Sender Comp</th>
+				<th>Network</th>
+				<th>EMS/OMS</th>
+				<th>Obo</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody data-bind="foreach: connections">
+		<tr>
+			<td data-bind="text: sendercomp"></td>
+			<td data-bind="text: network"></td>
+			<td data-bind="text: platform"></td>
+			<td data-bind="text: obo"></td>
+			<td data-bind="click: editConnection"><button>Edit</button></td>
+		</tr>
+		</tbody>
+	</table>
+</section>

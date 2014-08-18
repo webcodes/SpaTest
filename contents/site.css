@@ -10,12 +10,12 @@ ul, ol, dl {
 	list-style: none;
 	list-style-image: none;
 }
-#topbar {
+#header {
 	font-weight: bold;
 	background-color: #2980b9;
 	color:#fff;
 }
-#topbar .logo {
+#header .logo, #header .logo_1{
 	background-image: url(images/logo.png);
 	display:inline-block;
 	width: 48px;
@@ -23,13 +23,17 @@ ul, ol, dl {
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 }
-#topbar h1 {
+#header .logo_1 {
+	background-image: url(images/logo_1.png);
+}
+
+#header h1 {
 	display: inline-block;
 	padding: 10px;
 	margin: 0;
 	vertical-align: top;
 }
-#topbar .searchbar {
+#header .searchbar {
 	display: inline-block;
 	float: right;
 }
@@ -39,11 +43,17 @@ ul, ol, dl {
 input.searchfield {
 	min-width: 200px;
 }
+
+#content-section {
+	min-height: 620px;
+    background-color: rgb(52,49,49);
+    display:inline-block;
+}
 .sidebar {
-	background-color: rgb(52,49,49);
 	cursor: pointer;
 	display: inline-block;
-	max-width: 200px;
+	min-width: 150px;
+	max-width: 150px;
 	color: #b3b3b3;
 }
 .sidebar ul li {
@@ -60,14 +70,72 @@ input.searchfield {
 	color: #b3b3b3;
 }
 .contents {
-	max-width: 1000px;
+	max-width: 1400px;
 	min-width: 1000px;
 	background-color: #fff;
 	display:inline-block;
 	padding: 10px 20px;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
+	min-height: 600px;
+	position: absolute;
+	left:150px;
+	top:52px;
 }
+.contents input[type='text'], .contents select, .contents textarea {
+	border:none;
+	border-bottom: 1px dotted #ccc;
+	border-radius: 0;
+	background-color: transparent; /*#DBF5FF;*/
+	font-size: .8em;
+	min-width: 150px;
+	margin-left: .5em;
+}
+.contents textarea {
+	min-height: 75px;
+	min-width: 300px;
+	border-bottom:1px dotted #ccc;
+	background-color: #F8F2AD;
+	resize:none;
+}
+.contents button {
+	/*border: 1px solid #448BB9;
+	background-color: #2F8DCA;
+	color: #fff; */
+	border: 1px solid #0076C5;
+	background-color: #137FC7;
+	font-size: 0.8em;
+	padding: .4em;
+	border-radius: 2px;
+	color: #fff;
+	cursor: pointer;
+}
+.contents button:active {
+	background-color: #C0D2E4;
+	outline:none;
+}
+.contents button:focus {
+	outline:none;
+}
+
+.contents input[type="checkbox"] + label, .contents input[type="radio"] + label {
+ 	cursor: pointer;
+}
+.contents input[type="checkbox"]:checked + label, .contents input[type="radio"]:checked + label {
+ 	background-color: #EAF6FC;
+}
+.contents table,  .contents table td{
+	border: none;
+	border-collapse: collapse;
+}
+	.contents table th, .contents table td {
+	 	border-bottom: 1px solid #b3b3b3;
+	 	padding:.5em;
+	 	font-size:.9em;
+	 }
+	 .contents table th{
+	 	background-color: #C0D2E4;
+	 }
 .clear {
 	clear: both;
 }
@@ -75,4 +143,10 @@ input.searchfield {
 	margin-top: 1em;
 	border-top: 1px dotted #ccc;
 	padding: .3em 0;
+}
+
+.error {
+	color: rgb(235, 0, 56);
+	font-size: .8em;
+	font-style: italic;
 }

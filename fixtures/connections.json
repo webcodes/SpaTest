@@ -1,0 +1,65 @@
+[
+	{
+		"id" : 1,
+		"isnextgen": false,
+		"obo": "one-obo",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "one-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-one",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 2,
+		"isnextgen": true,
+		"obo": "two-obo",
+		"session" : {
+			"id" : 22,
+			"sendercomp" : "two-sender",
+			"platform" : {
+				"id" : 222,
+				"name" : "plaform-two",
+				"vendor" : {
+					"id" : 2222,
+					"name": "vendor-two"
+				}
+			},
+			"network" : {
+				"id": 22222,
+				"name": "network-two"
+			}
+		}
+	},
+	{
+		"id" : 3,
+		"isnextgen": false,
+		"obo": "three-obo",
+		"session" : {
+			"id" : 33,
+			"sendercomp" : "three-sender",
+			"platform" : {
+				"id" : 333,
+				"name" : "plaform-three",
+				"vendor" : {
+					"id" : 3333,
+					"name": "vendor-three"
+				}
+			},
+			"network" : {
+				"id": 33333,
+				"name": "network-three"
+			}
+		}
+	}
+]

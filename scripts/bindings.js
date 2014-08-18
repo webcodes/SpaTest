@@ -1,41 +1,48 @@
-"use strict";
 define(function (require){
- 
- var utils = require("utils");
- //private
- // var applyBindingsOnTemplate = function(ele, pModel, component) {
- 	// return function(data) {
- 		// $(ele).html( data );
- 		// var container = $(ele).find("#container");
- 		// //expect the jsModule to provide a constructor fo vm
- 		// var vm = new component.ViewModel(pModel);
- 		// ko.applyBindings(vm, container[0]);
- 	// };
- // };
+	var utils = require("utils");
+	//private
+	var wrapTemplateInContainer = function(templateName, template, ele) {
+		var wrapperId = utils.format("{0}-container", templateName);
+		var wrapper = utils.format("<section id='{0}'></section>", wrapperId);
+		$(wrapper).appendTo($(ele)).html(template);
+		return $(ele).find(utils.format("#{0}", wrapperId));
+	};
+
+	var applyBindingsToComponent = function(context, vmodel, component) {
+		//experimental
+		vmodel = vmodel || {};
+		vmodel.parentContext = context;// && context.$context;
+		ko.applyBindings(vmodel, component);
+	};
+	var renderError = function(component) {
+		var errorMessage = utils.format("<span class='{0}'><i class='fa fa-warning'></i>{1}</span>", ["error", "The component module does not have a ViewModel"]);
+		$(component).html(errorMessage);
+	};
 
 	ko.bindingHandlers.component = {
-		init: function(ele, valueAccessor){
+		init: function(ele, valueAccessor, allBindings, viewModel, bindingContext){
 			valueAccessor();
-		  	
+			
 			ko.computed(function(){
 				var param = ko.unwrap(valueAccessor());
 				var moduleName = param.template;
 				var templateName = utils.format("../templates/{0}.html",param.template);
-				if (console)
-					console.log("name : " + templateName);
 				var template = "text!" + templateName;
-				var parentModel = ko.mapping.toJS(param.model || {}); //copy into a new POJO
 				
 				if (moduleName) {
-					 require([template, moduleName], function(template, module) {
-                        if (console)
-                        	console.log("done");
-						$(ele).html(template);
-						var container = $(ele).find("#container");
-						//expect the module to provide a constructor fo vm
-						var vm = new module.ViewModel(parentModel);
-						ko.applyBindings(vm, container[0]);
-                    });
+					require([template, moduleName], function(template, module) {
+	                    console.log("done fetching module and template");
+						var container = wrapTemplateInContainer(param.template, template, ele);
+							//expect the module to provide a constructor fo vm
+						if(module.ViewModel && typeof(module.ViewModel === 'function')) {
+							var vm = new module.ViewModel(bindingContext.$rawData);
+							//ko.applyBindings(vm, container[0]);
+							applyBindingsToComponent(bindingContext, vm, container[0]);
+						}	
+						else {
+							renderError(container[0]);
+						}
+	                });
 				}
 			});
 			

@@ -22,7 +22,7 @@ define(function(){
 				actuals.push(arguments[i]);
 			}
 		}
-		return str.replace(/\{([0-9]+)\}/g, function(_, index) {return actuals[index]});
+		return str.replace(/\{([0-9]+)\}/g, function(_, index) {return actuals[index];});
 		
 		// for(var i = 1; i< arguments.length; i++) {
 			 // var actual = arguments[i];
