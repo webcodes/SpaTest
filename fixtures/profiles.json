@@ -1,0 +1,26 @@
+[
+	{
+		"id" : 1,
+		"segmentation": "seg-one",
+		"ips" : "ips-one",
+		"coper" : "coper-one",
+		"legalName" : "Client-One Ltd."
+		
+	},
+	{
+		"id" : 2,
+		"segmentation": "seg-two",
+		"ips" : "ips-two",
+		"coper" : "coper-two",
+		"legalName" : "Client-Two Ltd."
+		
+	},
+	{
+		"id" : 3,
+		"segmentation": "seg-three",
+		"ips" : "ips-three",
+		"coper" : "coper-three",
+		"legalName" : "Client-Three Ltd."
+		
+	}
+]

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test SPA</title>
+	<link rel="stylesheet" type="text/css" href="contents/site.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<!--<script type="text/javascript" src = "//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-debug.js"></script> -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+	<script type="text/javascript" src="scripts/ko-postbox.min.js"></script>
+</head>
+<body>
+	<section id="header">
+			<a href="/app.html" class="logo"></a>
+			<h1>Spa Test</h1>
+			<div class="searchbar">
+				<input type="text" name="searchfield" class="searchfield" placeholder ="search here"/>
+				<button class="fa fa-search"></button>
+			</div>
+	</section>
+	<section id="content-section">
+		<nav class="sidebar">
+			<ul>
+				<li><i class="fa fa-home" style="color:#ccc;"></i><a href="/app.html">Home</a></li>
+				<li><a href="/app.html">About</a></li>
+			</ul>
+		</nav>
+		<div class="contents">
+			<div>
+				<label for="firstName">First Name : </label>
+				<input type ="text" id="firstName" data-bind="value: firstName, valueUpdate: 'afterkeydown'"/>
+
+				<label for="lastName">Last Name : </label>
+				<input type ="text" id="lastName" data-bind="value: lastName, valueUpdate: 'afterkeydown'"/>
+				
+				<label for="gender">Gender : </label>
+				<select id="gender" data-bind="options: genderList, optionsCaption: 'Select One', value: sex">
+				</select>
+
+				<label for="age">Age: </label>
+				<input type ="text" id="age" data-bind="value: age, valueUpdate: 'afterkeydown'"/>
+			
+			</div>
+
+			<div>
+			<span>The full name is <span data-bind="text:fullName"></span></span>
+			</div>
+
+			<div>
+				Styling for the form elements below
+				<br />
+				<button>Button Style</button>
+				<br />
+				<textarea placeholder="This is a Textarea"></textarea>
+				<br />
+				<input type="checkbox"  id="chkbox"/>
+				<label for="chkbox">This is a checkbox</label>
+				<br />
+				<input type="radio"  id="radio"/>
+				<label for="radio">This is a radio button</label>
+			</div>
+			<div class="component" data-bind="component: {template: 'details'}"></div>
+			<br />
+			<div class="component" data-bind="component: {template: 'connections'}"></div>
+			<br />
+		</div>		
+	</section>
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js" data-main="scripts/app"></script>
+
+</body>
+</html>
