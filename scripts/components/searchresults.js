@@ -1,24 +1,41 @@
-define(['server/profileRepository', 'text!templates/searchresults.html'], function(profileRepository, searchTemplate) {
+define(['server/profileRepository', 'server/connectionRepository', 'text!templates/searchresults.html'], function(profileRepo, connRepo, searchTemplate) {
 	
-	var setResults = function(matchingProfiles) {
+	var setResults = function(matchingProfiles, matchingConns) {
 		matchingProfiles = matchingProfiles || [];
-		this.searchResults(matchingProfiles);
+		matchingConns = matchingConns || [];
+		this.searchResults({profiles : matchingProfiles, connections : matchingConns});
 		this.searching(false);
 	};
-	var vm = function(params) {
-		var searchParams = ko.unwrap(params);
-		if (searchParams && ko.isObservable(searchParams.search)) {
+
+	var subscribeToSearchParameterChange = function(searchParams, self) {
+		//passing an observable as a parameter to a component binding does not automatically reevaluate the
+		//whole binding when the value of that observable changes. 
+		//so subscribe to a change in the value of that observable within the component
+		
+		if (searchParams && searchParams.search && ko.isObservable(searchParams.search)) {
 			searchParams.search.subscribe(function(newValue) {
+				self.searching(true);
 				console.log("Value changed. Now search again using " + newValue);
+				if(newValue) {
+					//search profiles
+					$.when(profileRepo.searchProfiles(newValue), connRepo.searchConnections(newValue))
+					.done(setResults.bind(self));
+				}
 			});
 		}
-		var searchValue = searchParams && ko.unwrap(searchParams.search);
+	}
+	var viewModel = function(params) {
 		var self = this;
+		var searchParams = ko.unwrap(params);
+		subscribeToSearchParameterChange(searchParams,self);
+		var searchValue = searchParams && ko.unwrap(searchParams.search);
+		
 		this.searching = ko.observable(true);
-		this.searchResults = ko.observableArray([]);
+		this.searchResults = ko.observable();
 		this.hasResults = ko.computed(function() {
-			var results = ko.unwrap(self.searchResults) || [];
-			return results.length > 0; 
+			var result = ko.unwrap(self.searchResults);
+			return (result && (result.profiles.length > 0 || result.connections.length > 0));
+			//return !!results; //truthy 
 		});
 		this.showInitial = ko.computed(function() {
 			var searching = ko.unwrap(self.searching);
@@ -31,11 +48,12 @@ define(['server/profileRepository', 'text!templates/searchresults.html'], functi
 		});
 		if(searchValue) {
 			//search profiles
-			profileRepository.searchProfiles(searchValue).done(setResults.bind(this));
+			$.when(profileRepo.searchProfiles(searchValue), connRepo.searchConnections(searchValue))
+					.done(setResults.bind(this));
 		}
 	};
 	return {
-		viewModel : vm, 
+		viewModel : viewModel, 
 		template : searchTemplate
 	};
 });

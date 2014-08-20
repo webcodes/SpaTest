@@ -1,14 +1,26 @@
 <section name="searchresults">
 	<!-- ko if:hasResults -->
 	<h4>Search Results</h4>
-	<ul data-bind="foreach: searchResults">
-		<li>
-			<div data-bind="text:ips" class="inline-fixed-width"></div>
-			<div data-bind="text:legalName" class="inline-fixed-width"></div>
-			<div data-bind="text:coper" class="inline-fixed-width"></div>
-			<div class="inline-fixed-width"><a data-bind="attr: {href: '#'}">View</a></div>
-		</li>
-	</ul>
+	<div data-bind="with:searchResults">
+		<ul data-bind="foreach: profiles">
+			<li>
+				<div data-bind="text:ips" class="inline-fixed-width"></div>
+				<div data-bind="text:legalName" class="inline-fixed-width"></div>
+				<div data-bind="text:coper" class="inline-fixed-width"></div>
+				<div class="inline-fixed-width"><a data-bind="attr: {href: '#'}">View</a></div>
+			</li>
+		</ul>
+	</div>
+	<div data-bind="with:searchResults">
+		<ul data-bind="foreach: connections">
+			<li>
+				<div data-bind="text:session.sendercomp" class="inline-fixed-width"></div>
+				<div data-bind="text:session.platform.name" class="inline-fixed-width"></div>
+				<div data-bind="text:session.network.name" class="inline-fixed-width"></div>
+				<div class="inline-fixed-width"><a data-bind="attr: {href: '#'}">View</a></div>
+			</li>
+		</ul>
+	</div>
 	<!-- /ko -->
 	<p data-bind="if: showInitial">The search did not give any results. Search again</p>
 	<p data-bind="if: searching">
