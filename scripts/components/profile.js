@@ -1,4 +1,4 @@
-define(["profileRepository", "text!../templates/profile.html"], function(repository, template){
+define(["server/profileRepository", "text!../templates/profile.html", "utils/stringutils", "utils/uiutils"], function(repository, template, stringUtils, uiUtils){
 	var setProfiles = function(profile){
 		profile = profile || {};
 		var self = this;
@@ -21,7 +21,19 @@ define(["profileRepository", "text!../templates/profile.html"], function(reposit
 		};
 
 		this.save = function() {
-			ko.postbox.publish("PROFILEUPDATED", this);
+			var profile = {
+				id : this.id,
+				segmentation : this.segmentation,
+				ips : this.ips,
+				coper : this.coper,
+				legalName : this.legalName,
+			};
+			repository.updateProfile(profile).done(function() {
+				ko.postbox.publish("PROFILEUPDATED", profile.id);
+				uiUtils.showSuccess(stringUtils.format("The profile with id {0} saved!", profile.id));
+			}).fail(function(ex) {
+				uiUtils.showError(stringUtils.format("An error occured : {0}", ex));
+			});
 		};
 
 		var profile = ko.unwrap(param.profile);
@@ -30,17 +42,6 @@ define(["profileRepository", "text!../templates/profile.html"], function(reposit
 		this.ips = profile.ips;
 		this.coper = profile.coper;
 		this.legalName = profile.legalName;
-		// this.viewDetails = ko.observable(false);
-		// this.viewList = ko.computed(function(){
-		// 	return !self.viewDetails();
-		// });
-		// this.selectedProfile = ko.observable();
-		// this.showProfile = function(profile) {
-		// 	console.log(this);
-		// 	self.selectedProfile(profile);
-		// 	self.viewDetails(true);
-		// };
-		// repository.getProfiles().done(setProfiles.bind(this));
 	};
 
 	return {viewModel : viewModel, template : template};

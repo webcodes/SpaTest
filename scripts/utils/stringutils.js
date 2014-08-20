@@ -1,4 +1,4 @@
-define(function(){
+define(function(require){
 	//private 
 	var replacer = function(actual, index){
 		return function(match, offset, string) {
@@ -23,14 +23,12 @@ define(function(){
 			}
 		}
 		return str.replace(/\{([0-9]+)\}/g, function(_, index) {return actuals[index];});
-		
-		// for(var i = 1; i< arguments.length; i++) {
-			 // var actual = arguments[i];
-			 // newStr = newStr + str.replace(rex, replacer(actual, i));
-		 // }
-		//return newStr;
+
 	};
+
+	
 	return {
-		format : format
+		format : format,
+		
 	};
 });

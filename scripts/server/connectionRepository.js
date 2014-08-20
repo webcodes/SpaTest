@@ -1,5 +1,5 @@
 define(function(require){
-	var utils = require('utils');
+	var stringUtils = require("utils/stringutils");
 	var getConnections = function() {
 		var deferred = new $.Deferred();
 		var connections = require(["text!../fixtures/connections.json"], function(connectionsfile){
@@ -8,7 +8,7 @@ define(function(require){
 				return deferred.resolve(conns);
 			}
 			catch(ex) {
-				console.log(utils.format("An error occured - {0}", ex));
+				console.log(stringUtils.format("An error occured - {0}", ex));
 				return deferred.reject();
 			}
 		});
@@ -26,7 +26,7 @@ define(function(require){
 				return deferred.resolve(matchingConn);
 			}
 			catch(ex) {
-				console.log(utils.format("An error occured - {0}", ex));
+				console.log(stringUtils.format("An error occured - {0}", ex));
 				return deferred.reject();
 			}
 		});

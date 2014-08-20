@@ -1,5 +1,5 @@
 <section name="profiles" data-bind="visible: viewList">
-	<table>
+	<table data-bind="if: hasProfiles">
 		<thead>
 			<tr>
 				<th>IPS</th>
@@ -9,7 +9,7 @@
 				<th></th>
 			</tr>
 		</thead>
-		<tbody data-bind="foreach: profiles">
+		<tbody data-bind="foreach: recentProfiles">
 		<tr>
 			<td data-bind="text: ips"></td>
 			<td data-bind="text: coper"></td>
@@ -19,6 +19,7 @@
 		</tr>
 		</tbody>
 	</table>
+	<p data-bind="ifnot: hasProfiles">You haven't recently visited any profiles. Search for one in the top search bar.</p>
 </section>
 <section data-bind="if: viewDetails">
 	<profile  params="'profile' : selectedProfile"></profile>

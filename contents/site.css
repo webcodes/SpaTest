@@ -1,7 +1,7 @@
 body {
 	background: rgba(0,0,0,0.05);
 	margin:0;
-	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
 	font-weight: normal;
 }
 ul, ol, dl {
@@ -37,13 +37,25 @@ ul, ol, dl {
 	display: inline-block;
 	float: right;
 }
-.searchbar input, .searchbar button{
+.searchbar input {
 	font-size: .9em;
 }
 input.searchfield {
 	min-width: 200px;
 }
-
+.searchbar input[type='submit'] {
+	border:none;
+	background-color: rgb(52,49,49);
+	font-size: 0.8em;
+	padding: .3em .4em;
+	border-radius: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+input.searchfield:focus {
+	min-width: 300px;
+	outline:1px solid rgba(43, 120, 192, 0.85);
+}
 #content-section {
 	min-height: 620px;
     background-color: rgb(52,49,49);
@@ -98,7 +110,7 @@ input.searchfield {
 	background-color: #F8F2AD;
 	resize:none;
 }
-.contents button {
+.contents button, .contents input[type='submit'], .contents input[type='button'] {
 	/*border: 1px solid #448BB9;
 	background-color: #2F8DCA;
 	color: #fff; */
@@ -149,4 +161,62 @@ input.searchfield {
 	color: rgb(235, 0, 56);
 	font-size: .8em;
 	font-style: italic;
+}
+
+
+/* ********* Xenon Messager ********/
+
+#msg-container {
+	display:none;
+}
+.xemsgr-top-full {
+	position: fixed;
+	left: 10px;
+	top: 0;
+	width:100%;
+}
+.xemsgr-bottom-full {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	width:100%;
+}
+.xemsgr-success, .xemsgr-error, .xemsgr-info {
+	width:95%;
+	opacity: .85;
+	padding: .5em;
+	border-radius: 2px;
+}
+.xemsgr-success {
+	background-color:  rgba(156, 244, 156, 0.85);
+}
+.xemsgr-error {
+	background-color: rgba(193,56,50,0.85);
+}
+.xemsgr-info {
+	background-color: rgba(43, 120, 192, 0.85);
+}
+.xemsgr-close-button {
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	position: relative;
+	right: -0.3em;
+	top: -0.3em;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+	opacity: 0.8;
+}
+.xemsgr-msg {
+	word-wrap: break-word;
+	color: #ffffff;	
+}
+
+/* ********* Xenon Messager ********/
+.inline-fixed-width {
+	width:200px;
+	display: inline-block;
 }

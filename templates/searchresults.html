@@ -1,0 +1,18 @@
+<section name="searchresults">
+	<!-- ko if:hasResults -->
+	<h4>Search Results</h4>
+	<ul data-bind="foreach: searchResults">
+		<li>
+			<div data-bind="text:ips" class="inline-fixed-width"></div>
+			<div data-bind="text:legalName" class="inline-fixed-width"></div>
+			<div data-bind="text:coper" class="inline-fixed-width"></div>
+			<div class="inline-fixed-width"><a data-bind="attr: {href: '#'}">View</a></div>
+		</li>
+	</ul>
+	<!-- /ko -->
+	<p data-bind="if: showInitial">The search did not give any results. Search again</p>
+	<p data-bind="if: searching">
+		Searching for profiles...
+		<i class="fa fa-refresh fa-spin"></i>
+	</p>
+</section>
