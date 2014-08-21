@@ -7,25 +7,56 @@ requirejs.config({
 		//"toastr" : "//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min"
 	}
 });
-define(function(require) {
-	//fallback for IE
+define(['plugins/router'], function(router) {
+
+  	var registerKoComponents = function() {
+  		ko.components.register('recentprofiles', {require : 'components/recentprofiles'});
+		ko.components.register('profile', {require : 'components/profile'});
+		ko.components.register('searchresults', {require : 'components/searchresults'});
+  	};
+
+  	//running a Sammy app
+  	
+  	//fallback for IE
 	$(document).ready(function() {
 	    if (!("autofocus" in document.createElement("input"))) {
 	      $("#header .searchfield").focus();
 	    }
   	});
 
-	ko.components.register('recentprofiles', {require : 'components/recentprofiles'});
-	ko.components.register('profile', {require : 'components/profile'});
-	ko.components.register('searchresults', {require : 'components/searchresults'});
-	
-	this.search = function(searchform){
-		//you get back the form
-		var searchField = $(searchform).find(".searchfield").val();
-		console.log(searchField);
-		this.searchItem(searchField);
-	};
+  	var spapp = (function() {
+		var self = this;
+		this.searchItem = ko.observable();
+		this.loadedComponent = ko.observable("");
+		this.showComponent = ko.observable(false);
+		this.compParam = {};
+  		this.search = function(searchform) {
+			//you get back the form
+			var searchField = $(searchform).find(".searchfield").val();
+			console.log(searchField);
+			location.hash = "/search/" + searchField;
+		};
+		registerKoComponents();
 
-	this.searchItem = ko.observable();
-	ko.applyBindings();
+		router.mapRoutes(
+			[
+				['get', '#/search/:key', function() {
+					console.log(this.path); 
+					var searchKey = this.params["key"];
+					self.searchItem(searchKey);
+					self.compParam = {"search" : self.searchItem};
+					self.loadedComponent("searchresults");
+					self.showComponent(!!self.searchItem());
+				}],
+				['get', '#/', function() {
+					console.log(this.path);
+					self.loadedComponent("recentprofiles");
+					self.showComponent(true);
+				}]
+			]
+		).activate();
+  	})();
+	
+
+	ko.applyBindings(spapp);
 });
