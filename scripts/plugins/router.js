@@ -1,17 +1,29 @@
 define(function() {
 	
-	var Router = function () {
+	//TODO: Create a sammy plugin to elegantly provide the callback.
+	//May be provide a routeactivator object that can take a callback. 
+	//And then the callback can use the context of the VM and still use the sammy context usign a route object?
+	
+
+	var Router = function (el) {
 		
-		var sammy = Sammy("#applicationHost", function(){
+		var sammy = Sammy(el, function(){
 			//this.use('koComponentLoader');
 		});
 
-		this.activate = function() {
-			if (sammy.getLocation().indexOf("#") < 0) {
-				sammy.run("#/");
+		this.activate = function(path) {
+			console.log("Sammy running at " + sammy.$element().attr("id"));
+			if (path) {
+				sammy.run(path);
 			}
-			else
-				sammy.run();
+			else {
+				if (sammy.getLocation().indexOf("#") < 0) {
+					sammy.run("#/");
+				}
+				else {
+					sammy.run();
+				}
+			}
 		};
 
 		this.mapRoutes = function(routes) {
@@ -20,6 +32,5 @@ define(function() {
 			return this;
 		};	
 	};
-	var router = new Router();
-	return router;
+	return Router;
 });

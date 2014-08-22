@@ -1,7 +1,7 @@
 define(function(require){
 	var stringUtils = require("utils/stringutils");
 	var localDb = require('server/localDb');
-	
+	var id = 0;
 	//private
 	var firstOrDefault = function (profiles, profileId) {
 		var matches = $.grep(profiles, function(value, index) {
@@ -56,13 +56,52 @@ define(function(require){
 			return matchingProfiles;
 		}
 	};
+
+	var pushProfileToLocalDb = function(dbkey, profile, uniquekey) {
+		var value = localDb.getItem(dbkey);
+		//if an array, add it if unique key. If not update it.
+		if (value && Array.isArray(value)) {
+			var match = $.grep(value, function(val, i) {
+				return val[uniquekey] === profile[uniquekey];
+			});
+			if (!match) {
+				value.push(profile);
+			}
+			else {
+				// $.each(value, function(val, i) {
+				// return val[uniquekey] === profile[uniquekey];
+				// });
+				//TODO: Find a way to update the record.
+				match = profile;
+			}
+		}
+		else {
+			value = [profile];
+		}
+		//else just update the value in place
+		localDb.setItem(dbkey, value);
+	};
+
+	var incrementId = function() {
+		if (id) {
+			return id++;
+		}
+		var allprofiles = localDb.getItem("profiles");
+		var ids = $.map(allprofiles, function(value, index){
+			return Number(value.id);
+		}); 
+		var maxId = Math.max.apply(Math, ids);
+		id = maxId+1;
+		return id;
+	};
+
 	var getProfiles = function(searchParam) {
 		var deferred = new $.Deferred();
 		require(["text!fixtures/profiles.json"], function(profilesFile) {
 			try{
 				var profiles = JSON.parse(profilesFile);
 				var matchingProfiles = findMatchingProfiles(profiles, searchParam);
-				localDb.setItem("searchedprofiles", matchingProfiles);
+				localDb.setItem("profiles", matchingProfiles);
 				return deferred.resolve(matchingProfiles);
 			}
 			catch(ex) {
@@ -75,7 +114,7 @@ define(function(require){
 
 	var getRecentProfiles = function() {
 		var deferred = new $.Deferred();
-		var profiles = localDb.getItem("searchedprofiles");
+		var profiles = localDb.getItem("visitedprofiles");
 		if (profiles) {
 			deferred.resolve(profiles);
 		}
@@ -87,13 +126,21 @@ define(function(require){
 
 	var getProfileById = function(id){
 		var deferred = new $.Deferred();
-		var connections = require(["text!fixtures/connections.json"], function(connectionsfile){
+		//check localstorage before going to server.
+		var profiles = localDb.getItem("profiles");
+		if (profiles) {
+			var match = firstOrDefault(profiles, id);
+			if (match) {
+				pushProfileToLocalDb("visitedprofiles", match, "id");
+				return deferred.resolve(match);
+			}
+		}
+		require(["text!fixtures/profiles.json"], function(profilesFile){
 			try{
-				var conns = JSON.parse(connectionsfile);
-				var matchingConn = $.grep(conns,function(conn, index){
-					return conn.id === id;	
-				});
-				return deferred.resolve(matchingConn);
+				var profiles = JSON.parse(profilesFile);
+				var match = firstOrDefault(profiles, id);
+				pushProfileToLocalDb("visitedprofiles", match, "id");
+				return deferred.resolve(match);
 			}
 			catch(ex) {
 				console.log(stringUtils.format("An error occured - {0}", ex));
@@ -106,13 +153,9 @@ define(function(require){
 	var addProfile = function(profile) {
 		var deferred = new $.Deferred();
 		try{
-			var profiles = localDb.getItem("searchedprofiles");
-			if (profiles && Array.isArray(profiles)) {
-				profiles.push(profile);
-				localDb.setItem("profiles", profiles);
-				return deferred.resolve(true);
-			}
-			return deferred.resolve(false);
+			profile.id = incrementId();
+			pushProfileToLocalDb("profiles", profile, "id");
+			return deferred.resolve(profile);
 		}
 		catch(ex) {
 			console.log(stringUtils.format("An error occured, {0}", ex) );
@@ -125,19 +168,20 @@ define(function(require){
 		var deferred = new $.Deferred();
 		try{
 			//throw new Error("Internal error saving to localDB");
-			var profiles = localDb.getItem("profiles");
-			if (profiles && Array.isArray(profiles)) {
-				var match = firstOrDefault(profiles, profile.id);
-				{
-					match.segmentation = profile.segmentation;
-					match.ips = profile.ips;
-					match.coper = profile.coper;
-					match.legalName = profile.legalName;
-				}
-				localDb.setItem("profiles", profiles);
-				return deferred.resolve(true);
-			}
-			return deferred.resolve(false);
+			// if (profiles && Array.isArray(profiles)) {
+			// 	var match = firstOrDefault(profiles, profile.id);
+			// 	{
+			// 		match.segmentation = profile.segmentation;
+			// 		match.ips = profile.ips;
+			// 		match.coper = profile.coper;
+			// 		match.legalName = profile.legalName;
+			// 	}
+			// 	localDb.setItem("profiles", profiles);
+			// 	return deferred.resolve(true);
+			// }
+			// return deferred.resolve(false);
+			pushProfileToLocalDb("profiles", profile, "id");
+			return deferred.resolve(profile);
 		}
 		catch(ex) {
 			console.log(stringUtils.format("An error occured, {0}", ex) );

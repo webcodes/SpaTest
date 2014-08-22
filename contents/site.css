@@ -33,9 +33,15 @@ ul, ol, dl {
 	margin: 0;
 	vertical-align: top;
 }
+#header a:link, #header a:visited, #header a:hover, #header a:active{
+	color:#fff;
+	text-decoration: none;
+}
+
 #header .searchbar {
 	display: inline-block;
 	float: right;
+	margin-top:10px;
 }
 .searchbar input {
 	font-size: .9em;
@@ -56,7 +62,7 @@ input.searchfield:focus {
 	min-width: 300px;
 	outline:1px solid rgba(43, 120, 192, 0.85);
 }
-#content-section {
+/*#content-section {
 	min-height: 620px;
     background-color: rgb(52,49,49);
     display:inline-block;
@@ -93,6 +99,52 @@ input.searchfield:focus {
 	position: absolute;
 	left:150px;
 	top:52px;
+}*/
+.topbar {
+	cursor: pointer;
+	color: #b3b3b3;
+	background-color: rgb(52,49,49);
+}
+.topbar ul li {
+	padding: 10px 20px;
+	display: inline-block;
+}
+.topbar ul li:first-child {
+	padding: 10px 10px;
+}
+.topbar ul li:hover {
+	background-color: rgb(78,74,74);
+}
+.topbar ul li a, .topbar ul li a:link, .topbar ul li a:visited, .topbar ul li a:hover, .topbar ul li a:active {
+	display: inline-block;
+	padding: .2em;
+	font-size: 90%;
+	text-decoration: none;
+	color: #b3b3b3;
+}
+.content-section {
+    background-color: rgb(52,49,49);
+}
+.contents {
+	max-width: 1400px;
+	min-width: 1000px;
+	background-color: #fff;
+	padding: 10px 20px;
+	/*border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;*/
+	border: 1px solid #eee;
+	min-height: 600px;
+	margin: 0 .2em;
+}
+.contents .topbar {
+	display:inline-block;
+}
+.contents .topbar ul li {
+	padding:5px 10px;
+	border-right:1px solid #efefef;
+}
+.contents .topbar ul li.selected {
+	color:#fff;
 }
 .contents input[type='text'], .contents select, .contents textarea {
 	border:none;
@@ -216,7 +268,15 @@ input.searchfield:focus {
 }
 
 /* ********* Xenon Messager ********/
+
 .inline-fixed-width {
 	width:200px;
+	display: inline-block;
+	padding: 5px;
+}
+
+.list-container {
+	border:1px solid #aaa;
+	min-width:800px;
 	display: inline-block;
 }

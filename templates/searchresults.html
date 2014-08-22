@@ -1,18 +1,26 @@
 <section name="searchresults">
 	<!-- ko if:hasResults -->
 	<h4>Search Results</h4>
-	<div data-bind="with:searchResults">
-		<ul data-bind="foreach: profiles">
-			<li>
-				<div data-bind="text:ips" class="inline-fixed-width"></div>
-				<div data-bind="text:legalName" class="inline-fixed-width"></div>
-				<div data-bind="text:coper" class="inline-fixed-width"></div>
-				<div class="inline-fixed-width"><a data-bind="attr: {href: '#'}">View</a></div>
+	<div class="topbar">
+		<ul data-bind="foreach:tabs">
+			<li data-bind="text:$data, click: $parent.showTab, css: {'selected' : $data === $parent.visibleTab()}">
 			</li>
 		</ul>
 	</div>
 	<div data-bind="with:searchResults">
-		<ul data-bind="foreach: connections">
+		<ul data-bind="foreach: profiles, visible: $parent.visibleTab() ==='Profiles', css: {'list-container' : profiles.length > 0}">
+			<li>
+				<div data-bind="text:ips" class="inline-fixed-width"></div>
+				<div data-bind="text:legalName" class="inline-fixed-width"></div>
+				<div data-bind="text:coper" class="inline-fixed-width"></div>
+				<div class="inline-fixed-width"><button data-bind="click: $parents[1].showProfile">View</button>
+					<!-- <a data-bind="attr: {href: '/profile'}">View</a> -->
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div data-bind="with:searchResults">
+		<ul data-bind="foreach: connections, visible: $parent.visibleTab() ==='Connections', css: {'list-container' : connections.length > 0}" >
 			<li>
 				<div data-bind="text:session.sendercomp" class="inline-fixed-width"></div>
 				<div data-bind="text:session.platform.name" class="inline-fixed-width"></div>

@@ -12,19 +12,15 @@ define(["server/profileRepository", "text!templates/recentprofiles.html", "ko/kn
 			var profiles = ko.unwrap(self.recentProfiles);
 			return profiles.length > 0;
 		});
-		this.viewDetails = ko.observable(false).subscribeTo("VIEWPROFILELIST");
 		this.profileUpdated = ko.observable().subscribeTo("PROFILEUPDATED", function(){
 			//console.log(profile);
-			repository.getProfiles().done(setProfiles.bind(self));
+			repository.getRecentProfiles().done(setProfiles.bind(self));
 		});
-		this.viewList = ko.computed(function(){
-			return !self.viewDetails();
-		});
+
 		this.selectedProfile = ko.observable();
 		this.showProfile = function(profile) {
 			console.log(this);
-			self.selectedProfile(profile);
-			self.viewDetails(true);
+			location.hash = "/profile/" + profile.id;
 		};
 
 		repository.getRecentProfiles().done(setProfiles.bind(this));

@@ -1,4 +1,4 @@
-define(['connectionRepository'], function(repository){
+define(['connectionRepository',"text!templates/connections.html"], function(repository, template){
 	
 	var createViewModel = function(connections){
 		connections = connections || [];
@@ -25,6 +25,7 @@ define(['connectionRepository'], function(repository){
 		console.log(this);
 	};
 	return {
-		ViewModel : vm
+		viewModel : vm, 
+		template : template
 	};
 });

@@ -3,20 +3,57 @@ requirejs.config({
 		"text" : "//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min",
 		"ko" : "../lib",
 		"templates" : "../templates",
-		"fixtures" : "../fixtures"
+		"fixtures" : "../fixtures",
+		"plugins" : "./plugins"
 		//"toastr" : "//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min"
 	}
 });
-define(['plugins/router'], function(router) {
+define(['plugins/router'], function(Router) {
 
   	var registerKoComponents = function() {
   		ko.components.register('recentprofiles', {require : 'components/recentprofiles'});
 		ko.components.register('profile', {require : 'components/profile'});
 		ko.components.register('searchresults', {require : 'components/searchresults'});
+		ko.components.register('reports', {require : 'components/reports'});
+		ko.components.register('flows', {require : 'components/flows'});
   	};
 
   	//running a Sammy app
-  	
+  	var setupRouting = function(vm) {
+  		
+  		//TODO: find a better encapsulation for routing. This could grow long when there are a lot of routes.
+  		var rootRouter = new Router("#appRoot");
+  		rootRouter.mapRoutes(
+			[
+				//note: there are no routes registered for non hash routes (or external htmls.)
+
+				['get', '#/reports', function() {
+					console.log(this.path);
+					vm.componentName("reports");
+				}],
+				['get', '#/search/:key', function() {
+					console.log(this.path); 
+					var searchKey = this.params.key;
+					vm.searchItem(searchKey);
+					vm.componentParams = {"search" : vm.searchItem};
+					vm.componentName("searchresults");
+				}],
+
+				['get', '/#\/profile\/:id(\/)*/', function() {
+					console.log(this.path);
+					var profileId = this.params.id;
+					vm.componentParams = {"id" : profileId};
+					vm.componentName("profile");
+				}],
+
+				['get', '#/', function() {
+					console.log(this.path);
+					vm.componentName("recentprofiles");
+				}]
+			]
+		).activate();
+
+  	};
   	//fallback for IE
 	$(document).ready(function() {
 	    if (!("autofocus" in document.createElement("input"))) {
@@ -27,9 +64,11 @@ define(['plugins/router'], function(router) {
   	var spapp = (function() {
 		var self = this;
 		this.searchItem = ko.observable();
-		this.loadedComponent = ko.observable("");
-		this.showComponent = ko.observable(false);
-		this.compParam = {};
+		this.componentName = ko.observable();
+		this.loadComponent = ko.computed(function() {
+			return self.componentName() && self.componentName().length > 0;
+		});
+		this.componentParams = {};
   		this.search = function(searchform) {
 			//you get back the form
 			var searchField = $(searchform).find(".searchfield").val();
@@ -37,26 +76,8 @@ define(['plugins/router'], function(router) {
 			location.hash = "/search/" + searchField;
 		};
 		registerKoComponents();
-
-		router.mapRoutes(
-			[
-				['get', '#/search/:key', function() {
-					console.log(this.path); 
-					var searchKey = this.params["key"];
-					self.searchItem(searchKey);
-					self.compParam = {"search" : self.searchItem};
-					self.loadedComponent("searchresults");
-					self.showComponent(!!self.searchItem());
-				}],
-				['get', '#/', function() {
-					console.log(this.path);
-					self.loadedComponent("recentprofiles");
-					self.showComponent(true);
-				}]
-			]
-		).activate();
+		setupRouting(self);
   	})();
-	
 
 	ko.applyBindings(spapp);
 });
