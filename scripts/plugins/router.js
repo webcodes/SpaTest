@@ -35,7 +35,6 @@ define(function() {
 		this.bind = function(name,callback) {
 			sammy.bind(name,callback);
 		};
-
 		/*this.isRunning = function() {
 			return sammy.isRunning();
 		};

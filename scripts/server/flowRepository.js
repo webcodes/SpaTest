@@ -35,13 +35,14 @@ define(function(require) {
 
 	var getFlowById = function(id){
 		var deferred = new $.Deferred();
-		if (!id)
+		if (!id) {
 			return deferred.resolve(getNewTemplate());
+		}
 		var key = "flow-" + id;
 		//check localstorage before going to server.
 		var flow = localDb.getItem(key);
 		if (flow) {
-			return deferred.resolve(match);
+			return deferred.resolve(flow);
 		}
 		require(["text!fixtures/flows.json"], function(flowsFile){
 			try{
@@ -78,8 +79,46 @@ define(function(require) {
 		}
 	};
 
+	var getAllRegions = function() {
+		var deferred = new $.Deferred();
+		deferred.resolve(["AMRS", "EMEA", "APAC"]);
+		return deferred.promise();
+	};
+
+	var getAllCountriesWithRegion = function(region) {
+		var deferred = new $.Deferred();
+		deferred.resolve([{region: "AMRS", name: "USA"}, {region: "AMRS", name: "Canada"}, {region: "AMRS", name: "Brazil"}]);
+		return deferred.promise();
+	};
+
+	var getAllAssetClassWithRegionAndCountry = function(region) {
+		var deferred = new $.Deferred();
+		// try {
+		// 	throw new Error("No connection estalished.");	
+		// }
+		// catch(ex) {
+		// 	deferred.reject(ex);
+		// }
+			
+		deferred.resolve([
+			{region: "AMRS", country: "USA", name: "Equities"}, 
+			{region: "AMRS", country: "USA", name: "Options"}, 
+			{region: "AMRS", country: "USA", name: "Futures"}, 
+			{region: "AMRS", country: "Canada", name: "Equities"}, 
+			{region: "AMRS", country: "Canada", name: "Options"},
+			{region: "AMRS", country: "Brazil", name: "Equities"}, 
+			{region: "AMRS", country: "Brazil", name: "Options"},
+			{region: "EMEA", name: "Options"},
+			{region: "EMEA", name: "Equities"},
+			{region: "APAC", name: "Equities"}
+		]);
+		return deferred.promise();
+	};
 	return {
 		getAllFlowsForProfile : getFlowsForProfile,
-		getFlowById : getFlowById
+		getFlowById : getFlowById,
+		getAllRegions : getAllRegions,
+		getAllCountriesWithRegion : getAllCountriesWithRegion,
+		getAllAssetClassWithRegionAndCountry : getAllAssetClassWithRegionAndCountry
 	};
 });

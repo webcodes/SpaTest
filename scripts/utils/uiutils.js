@@ -40,7 +40,7 @@ define(function(require){
 			return;
 		var defaultOptions = {
 			"closeButton": true,
-			"positionClass": "xemsgr-bottom-full",
+			"positionClass": "xemsgr-top-full",
 			"showDuration": "300",
 			"hideDuration": "1000",
 			"timeOut": "4000"

@@ -18,6 +18,8 @@ define(['plugins/router'], function(Router) {
 		ko.components.register('connections', {require : 'components/connections'});
 		ko.components.register('flows', {require : 'components/flows'});
 		ko.components.register('floweditor', {require : 'components/floweditor'});
+		ko.components.register('custidrenderer', {require : 'components/custidrenderer'});
+		ko.components.register('dummycomponent', {require : 'components/dummycomponent'});
   	};
 
   	//running a Sammy app
@@ -33,6 +35,7 @@ define(['plugins/router'], function(Router) {
 				}],
 				['get', '#/search/:key', function() {
 					var searchKey = this.params.key;
+					vm.previous = this.app.getLocation();
 					vm.searchItem(searchKey);
 					vm.componentParams = {"search" : vm.searchItem};
 					vm.componentName("searchresults");
@@ -40,12 +43,13 @@ define(['plugins/router'], function(Router) {
 
 				['get', /#\/profile\/(\d+)(\/)*/, function() {
 					var profileId = this.params.splat[0];
-					vm.componentParams = {"id" : profileId};
+					vm.componentParams = {"id" : profileId, "prev" : vm.previous};
 					vm.componentName("profile");
 					this.trigger('loadprofilecomponents');
 				}],	
 
 				['get', '#/', function() {
+					vm.previous = this.app.getLocation();
 					vm.componentName("recentprofiles");
 				}]
 			]

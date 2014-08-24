@@ -1,31 +1,51 @@
-<div data-bind="with: flow, css: viewClass">
-	<div><button class="fore" data-bind="text: $parent.view, click: $parent.toggleView"></button></div>
+<div data-bind="css: viewClass">
+	<div><button class="fore" data-bind="text: view, click: toggleView"></button></div>
 	<div class="padding-div">
 		<div>
-			<label for="assetclass">Asset Class: </label>
-			<input type ="text" id="assetclass" data-bind="value: assetclass"/>
-
-			<label for="channel">Channel : </label>
-			<input type ="text" id="channel" data-bind="value: channel"/>
-			
-			<label for="region">Region : </label>
-			<input type ="text" id="region" data-bind="value: region"/>
-
-			<label for="country">Country: </label>
-			<input type ="text" id="country" data-bind="value: country"/>
+			<div class="row">
+				<div class="col-width-200">	
+					<fieldset>
+						<legend>Region : </legend>
+						<!-- ko foreach: {data : regionList, as : 'item'}-->
+						<p>
+							<input type="radio" name="region" data-bind="attr: {id: item}, value: item, checked: $parent.flow.region" />
+							<label data-bind="attr : {for : item}, text: item"></label>
+						</p>
+						<!-- /ko -->
+					</fieldset>
+				</div>
+				<div class="col-width-200">	
+					<fieldset>
+						<legend>Country : </legend>
+						<!-- ko foreach: {data : countryListFiltered, as : 'item'}-->
+						<p>
+							<input type="radio" name="country" data-bind="attr: {id: item}, value: item, checked: $parent.flow.country" />
+							<label data-bind="attr : {for : item}, text: item"></label>
+						</p>
+						<!-- /ko -->
+					</fieldset>
+				</div>
+				<div class="col-width-200">	
+					<fieldset>
+						<legend>Asset Class : </legend>
+						<!-- ko foreach: {data : assetClassListFiltered, as : 'item'}-->
+						<p>
+							<input type="radio" name="assetclass" data-bind="attr: {id: item}, value: item, checked: $parent.flow.assetclass" />
+							<label data-bind="attr : {for : item}, text: item"></label>
+						</p>
+						<!-- /ko -->
+					</fieldset>
+				</div>
+			</div>
+			<div class="row">	
+				<custidrenderer params="{'flow' : flow}"></custidrenderer>
+				<dummycomponent params="{'flow' : flow}"></dummycomponent>
+			</div>
 		</div>
-		<div>
-			<label for="assetclass">Sender Comp: </label>
-			<input type ="text" id="assetclass" data-bind="value: assetclass"/>
 
-			<label for="channel">Platform : </label>
-			<input type ="text" id="channel" data-bind="value: channel"/>
-			
-			<label for="region">CustId : </label>
-			<input type ="text" id="region" data-bind="value: region"/>
-		</div>
 		<div>
-			<button data-bind="click: $parent.save">Save</button>	
+			<button data-bind="click: save">Save</button>	
+			<button data-bind="click: cancel">Cancel</button>	
 		</div>
 	</div>
 </div>

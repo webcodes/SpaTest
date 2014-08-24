@@ -1,5 +1,5 @@
 <section name="profile" >
-	<div class="float-right"><button data-bind="click: goBack">Back</button></div>
+	<!-- <div class="float-right"><button data-bind="click: goBack">Back</button></div> -->
 	<!-- ko if: profileVm -->
 	
 	<div class="sticky-sidebar">
@@ -8,24 +8,43 @@
 		</ul>
 	</div>
 	<div class="inline-contents">
-		<div data-bind="with: profileVm">
-			<label for="legalName">Client Name: </label>
-			<input type ="text" id="legalName" data-bind="value: legalName"/>
-
-			<label for="ips">IPS : </label>
-			<input type ="text" id="ips" data-bind="value: ips"/>
+		<div data-bind="with: profileVm" class="bordered-div">
+			<div class="row">
+				<div class="col-width-100">
+					<label for="legalName">Client Name: </label>
+				</div>	
+				<div class="col-width-200">	
+					<span id="legalName" data-bind="text: legalName"></span>
+				</div>	
+				<div class="col-width-100">
+					<label for="ips">IPS : </label>
+				</div>	
+				<div class="col-width-200">	
+					<span id="ips" data-bind="text: ips"></span>
+				</div>	
+				<div class="col-width-100">
+					<label for="coper">Coper: </label>
+				</div>
+				<div class="col-width-200">	
+					<span id="coper" data-bind="text: coper"></span>
+				</div>
+			</div>
+			<div class="row">
+				
+				<div class="col-width-200">	
+					<label for="segmentation">Segmentation : </label>
+				</div>
+				<div class="col-width-200">
+					<input type ="text" id="segmentation" data-bind="value: segmentation"/>
+				</div>
+			</div>
 			
-			<label for="segmentation">Segmentation : </label>
-			<input type ="text" id="segmentation" data-bind="value: segmentation"/>
-
-			<label for="coper">Coper: </label>
-			<input type ="text" id="coper" data-bind="value: coper"/>
 			<div>
 				<button data-bind="click: $parent.save">Save</button>	
 			</div>
 		</div>
 		<!-- ko foreach: componentsToLoad -->
-			<div class="component-container" data-bind="component: {
+			<div class="bordered-div" data-bind="component: {
 					name: componentName,
 					params: componentParams
 			}"></div>

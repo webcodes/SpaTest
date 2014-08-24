@@ -111,9 +111,9 @@ input.searchfield:focus {
 }
 .contents {
 	max-width: 1400px;
-	min-width: 1000px;
+	min-width: 800px;
 	background-color: #fff;
-	padding: 10px 20px;
+	padding: 0 20px;
 	/*border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;*/
 	border: 1px solid #eee;
@@ -130,6 +130,48 @@ input.searchfield:focus {
 .contents .topbar ul li.selected {
 	color:#fff;
 }
+.contents .component-container {
+	/*padding: 10px;*/
+	position:relative;
+}
+
+.sticky-sidebar {
+	cursor: pointer;
+	display: inline-block;
+	min-width: 100px;
+	max-width: 150px;
+	color: #b3b3b3;
+	background-color: rgb(52,49,49);
+	position: fixed;
+	top: 100px;
+	left:0;
+	z-index: 9999;
+}
+.sticky-sidebar  ul li {
+	padding: 10px 20px;
+}
+.sticky-sidebar  ul li:hover {
+	background-color: rgb(78,74,74);
+}
+.sticky-sidebar  ul li a, .sticky-sidebar ul li a:link, .sticky-sidebar ul li a:visited, .sticky-sidebar ul li a:hover, .sticky-sidebar ul li a:active {
+	display: inline-block;
+	padding: .2em;
+	font-size: 90%;
+	text-decoration: none;
+	color: #b3b3b3;
+}
+.inline-contents {
+	position: absolute;
+	left: 150px;
+	top:0;
+	/*border:1px solid rgb(200,200,200);*/
+	padding:10px;
+	width:89.3%;
+	border-top:0;
+	min-height:400px;
+}
+
+/* *** Contents Form Styling *** */
 .contents input[type='text'], .contents select, .contents textarea {
 	border:none;
 	border-bottom: 1px dotted #ccc;
@@ -185,6 +227,9 @@ input.searchfield:focus {
 	 .contents table th{
 	 	background-color: #C0D2E4;
 	 }
+
+/* *** Contents Form Styling *** */
+
 .clear {
 	clear: both;
 }
@@ -273,42 +318,8 @@ input.searchfield:focus {
 	display: inline-block;
 }
 
-.sticky-sidebar {
-	cursor: pointer;
-	display: inline-block;
-	min-width: 100px;
-	max-width: 150px;
-	color: #b3b3b3;
-	background-color: rgb(52,49,49);
-	position: fixed;
-	top: 100px;
-	left:0;
-	z-index: 9999;
-}
-.sticky-sidebar  ul li {
-	padding: 10px 20px;
-}
-.sticky-sidebar  ul li:hover {
-	background-color: rgb(78,74,74);
-}
-.sticky-sidebar  ul li a, .sticky-sidebar ul li a:link, .sticky-sidebar ul li a:visited, .sticky-sidebar ul li a:hover, .sticky-sidebar ul li a:active {
-	display: inline-block;
-	padding: .2em;
-	font-size: 90%;
-	text-decoration: none;
-	color: #b3b3b3;
-}
-.inline-contents {
-	position: absolute;
-	left: 150px;
-	top:100px;
-	border:1px solid rgb(200,200,200);
-	padding:10px;
-}
 
-.component-container {
-	padding: 10px;
-}
+
 
 .clearfix {
 	clear:both;
@@ -340,19 +351,38 @@ input.searchfield:focus {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: #fff;
+	background-color: rgba(248, 248, 248, 0.97);
 	width: 100%;
 	min-height: 600px;
 	z-index: 99999;
+	font-size:.8em !important;
 }
 .translucent {
-	opacity: .4;
+	opacity: .2;
 	background-color: #b3b3b3;
 }
-
+.editor-view p {
+	margin : .2em;
+}
 .fore {
 	z-index: 10000;
 	position:absolute;
 	right:0;
 	top:0;
+}
+div.row {
+	clear:both;
+	display:block;
+}
+div.row .col-width-200, div.row .col-width-100{
+	width:200px;
+	display:inline-block;
+	padding:10px 0;
+}
+div.row .col-width-100 {
+	width:100px;
+}
+div.bordered-div {
+	border:1px solid#b3b3b3;
+	margin-top:.1em;
 }

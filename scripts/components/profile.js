@@ -21,7 +21,8 @@ define(["server/profileRepository",
 		return matches[1];
 	};
 	var getComponentLinks = function(self) {
-		return [{
+		var links = [
+		{
 			title : "Connections",
 			link : self.baseUrl + "/#/connections"
 		},
@@ -29,6 +30,12 @@ define(["server/profileRepository",
 			title : "Flows",
 			link : self.baseUrl + "/#/flows"	
 		}];
+		if(self.prev) {
+			var backLink = { link : self.prev };
+			backLink.title = /\#\/search/.test(self.prev) ? "Back to Search" : "Back Home";
+			links.push(backLink);
+		}
+		return links;
 	};
 
 	var loadComponents = function(vm, url) {
@@ -101,7 +108,7 @@ define(["server/profileRepository",
 		var self = this; //create a closure
 		var params = ko.unwrap(param);
 		var id = ko.unwrap(param.id);
-
+		self.prev = ko.unwrap(param.prev);
 		this.baseUrl = extractBaseUrl();
 		this.profileVm = ko.observable();
 		this.componentsToLoad = ko.observableArray();
