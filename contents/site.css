@@ -180,6 +180,7 @@ input.searchfield:focus {
 	 	border-bottom: 1px solid #b3b3b3;
 	 	padding:.5em;
 	 	font-size:.9em;
+	 	text-align: left;
 	 }
 	 .contents table th{
 	 	background-color: #C0D2E4;
@@ -313,4 +314,45 @@ input.searchfield:focus {
 	clear:both;
 	content: '';
 	display:block;
+}
+
+.cc, .new, .live, .onboarding {
+	color: rgb(206, 135, 46);
+	font-size: 1.4em;
+}
+.new {
+	color: rgb(27, 119, 204);
+}
+.live {
+	color: rgb(34, 102, 34);
+}
+.onboarding {
+	color: rgb(128, 122, 57);
+}
+
+.small-span {
+	font-size:.7em;
+}
+.padding-div {
+	padding:10px;
+}
+.editor-view {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	width: 100%;
+	min-height: 600px;
+	z-index: 99999;
+}
+.translucent {
+	opacity: .4;
+	background-color: #b3b3b3;
+}
+
+.fore {
+	z-index: 10000;
+	position:absolute;
+	right:0;
+	top:0;
 }

@@ -1,6 +1,6 @@
-<section name="connections">
-<h1>Flows</h1>
-<table>
+<section name="flows">
+	<h1>Flows</h1>
+	<table>
 		<thead>
 			<tr>
 				<th>Asset Class</th>
@@ -10,6 +10,7 @@
 				<th>Cust ID</th>
 				<th>Region</th>
 				<th>Country</th>
+				<th>Status</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -22,8 +23,17 @@
 			<td data-bind="text: custid"></td>
 			<td data-bind="text: region"></td>
 			<td data-bind="text: country"></td>
-			<td><button>Edit</button></td>
+			<td><i class="fa fa-tag" data-bind="css: statusClass"></i><span data-bind="text: status" class="small-span"></span></td>
+			<td><button data-bind="click: $parent.editFlow">Edit</button></td>
 		</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td><button data-bind="click: addFlow">Create</button></td>
+			</tr>
+		</tfoot>
 	</table>
+	<!-- ko if: detailsMode -->
+	<floweditor params="id: editId"></floweditor>
+	<!-- /ko -->
 </section>

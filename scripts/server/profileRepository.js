@@ -8,7 +8,7 @@ define(function(require){
 			return value.id === profileId;
 		});
 		return (matches && matches.length > 0) ? matches[0] : null;
-	}
+	};
 
 	var findMatchingProfiles = function(profiles, searchParam) {
 		if (!searchParam) {

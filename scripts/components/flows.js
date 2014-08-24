@@ -12,7 +12,9 @@ define(["server/flowRepository", "text!templates/flows.html", "utils/uiutils"], 
 				"channel" : flow.channel,
 				"custid" : flow.custid,
 				"region" : flow.region,
-				"country" : flow.country
+				"country" : flow.country,
+				"status" : flow.status,
+				"statusClass" : flow.status.toLowerCase()
 			};
 		});
 		//var obFlows = ko.viewmodel.fromModel(flatFlows);
@@ -20,6 +22,7 @@ define(["server/flowRepository", "text!templates/flows.html", "utils/uiutils"], 
 	};
 
 	var vm = function(param) {
+		var self = this;
 		var params = ko.unwrap(param);
 		var profileId = ko.unwrap(params.profileId);
 		profileId = Number(profileId, 10);
@@ -27,11 +30,24 @@ define(["server/flowRepository", "text!templates/flows.html", "utils/uiutils"], 
 			uiUtils.showError("The profile id supplied is not a valid number.");
 			return;
 		}
+		this.detailsMode = ko.observable(false);
 		this.flows = ko.observableArray([]);
 		repository.getAllFlowsForProfile(profileId).done(createViewModel.bind(this));
 
+		this.editFlow = function() {
+			self.editId = this.id;
+			self.detailsMode(true);
+			console.log(this);
+		};
+
+		this.addFlow = function() {
+			this.editId = 0;
+			this.detailsMode(true);
+			console.log(this);
+		};
+
 		this.dispose = function() {
-			console.log("Disposing connection View Model");
+			console.log("Disposing flows View Model");
 			//TODO: dispose any computed, manual subscription, widget bindings here...
 		};
 	};

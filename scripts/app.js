@@ -17,6 +17,7 @@ define(['plugins/router'], function(Router) {
 		ko.components.register('reports', {require : 'components/reports'});
 		ko.components.register('connections', {require : 'components/connections'});
 		ko.components.register('flows', {require : 'components/flows'});
+		ko.components.register('floweditor', {require : 'components/floweditor'});
   	};
 
   	//running a Sammy app
