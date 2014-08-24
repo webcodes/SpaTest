@@ -8,11 +8,10 @@ define(function() {
 	var Router = function (el) {
 		
 		var sammy = Sammy(el, function(){
-			//this.use('koComponentLoader');
+			this.debug = true;
 		});
 
 		this.activate = function(path) {
-			console.log("Sammy running at " + sammy.$element().attr("id"));
 			if (path) {
 				sammy.run(path);
 			}
@@ -24,6 +23,7 @@ define(function() {
 					sammy.run();
 				}
 			}
+			return this;
 		};
 
 		this.mapRoutes = function(routes) {
@@ -31,6 +31,19 @@ define(function() {
 			sammy.mapRoutes(routes);
 			return this;
 		};	
+
+		this.bind = function(name,callback) {
+			sammy.bind(name,callback);
+		};
+
+		/*this.isRunning = function() {
+			return sammy.isRunning();
+		};
+
+		this.dispose = function() {
+			//sammy.destory();
+			sammy.unload();
+		};*/
 	};
 	return Router;
 });

@@ -1,6 +1,7 @@
 [
 	{
 		"id" : 1,
+		"profileId" : 1,
 		"isnextgen": false,
 		"obo": "one-obo",
 		"session" : {
@@ -22,6 +23,7 @@
 	},
 	{
 		"id" : 2,
+		"profileId" : 1,
 		"isnextgen": true,
 		"obo": "two-obo",
 		"session" : {
@@ -44,6 +46,7 @@
 	{
 		"id" : 3,
 		"isnextgen": false,
+		"profileId" : 2,
 		"obo": "three-obo",
 		"session" : {
 			"id" : 33,

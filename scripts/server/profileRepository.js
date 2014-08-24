@@ -64,7 +64,7 @@ define(function(require){
 			var match = $.grep(value, function(val, i) {
 				return val[uniquekey] === profile[uniquekey];
 			});
-			if (!match) {
+			if (match.length === 0) {
 				value.push(profile);
 			}
 			else {

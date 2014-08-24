@@ -1,0 +1,152 @@
+[
+	{
+		"id" : 1,
+		"profileId" : 1,
+		"assetclass" : "Equities",
+		"channel" : "DSA",
+		"country" : "USA",
+		"region" : "AMRS",
+		"custid" : "ABC",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "one-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-one",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 2,
+		"profileId" : 1,
+		"assetclass" : "Equities",
+		"channel" : "DMA",
+		"country" : "Canada",
+		"region" : "AMRS",
+		"custid" : "DEF",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "two-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-two",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 3,
+		"profileId" : 1,
+		"assetclass" : "Options",
+		"channel" : "DSA",
+		"country" : "USA",
+		"region" : "AMRS",
+		"custid" : "PQR",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "one-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-two",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 4,
+		"profileId" : 1,
+		"assetclass" : "Options",
+		"channel" : "High-Touch",
+		"country" : "",
+		"region" : "EMEA",
+		"custid" : "RST",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "three-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-one",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 5,
+		"profileId" : 1,
+		"assetclass" : "Futures",
+		"channel" : "DMA",
+		"country" : null,
+		"region" : "EMEA",
+		"custid" : "MNO",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "three-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-three",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	},
+	{
+		"id" : 6,
+		"profileId" : 1,
+		"assetclass" : "Futures",
+		"channel" : "DSA",
+		"custid" : "MNO",
+		"country" : "USA",
+		"region" : "AMRS",
+		"session" : {
+			"id" : 11,
+			"sendercomp" : "two-sender",
+			"platform" : {
+				"id" : 111,
+				"name" : "plaform-two",
+				"vendor" : {
+					"id" : 1111,
+					"name": "vendor-one"
+				}
+			},
+			"network" : {
+				"id": 11111,
+				"name": "network-one"
+			}
+		}
+	}
+]	

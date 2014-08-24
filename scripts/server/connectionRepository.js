@@ -1,5 +1,13 @@
 define(function(require){
 	var stringUtils = require("utils/stringutils");
+	
+	var firstOrDefault = function (connections, connId) {
+		var matches = $.grep(connections, function(value, index) {
+			return value.id === connId;
+		});
+		return (matches && matches.length > 0) ? matches[0] : null;
+	}
+
 	var findMatchingConnections = function(connections, searchParam) {
 		if (!searchParam) {
 			return connections;
@@ -34,14 +42,30 @@ define(function(require){
 		return deferred.promise();	
 	};
 
+	var getConnectionsForProfile = function(profileId) {
+		var deferred = new $.Deferred();
+		var connections = require(["text!fixtures/connections.json"], function(connectionsfile){
+			try{
+				var conns = JSON.parse(connectionsfile);
+				var matchingConns = $.grep(conns, function(conn, i) {
+					return conn.profileId === profileId;
+				});
+				return deferred.resolve(matchingConns);
+			}
+			catch(ex) {
+				console.log(stringUtils.format("An error occured - {0}", ex));
+				return deferred.reject(ex);
+			}
+		});
+		return deferred.promise();	
+	};
+
 	var getConnectionById = function(id){
 		var deferred = new $.Deferred();
 		var connections = require(["text!../fixtures/connections.json"], function(connectionsfile){
 			try{
 				var conns = JSON.parse(connectionsfile);
-				var matchingConn = $.grep(conns,function(conn, index){
-					return conn.id === id;	
-				});
+				var matchingConn = firstOrDefault(conns, id);
 				return deferred.resolve(matchingConn);
 			}
 			catch(ex) {
@@ -54,6 +78,7 @@ define(function(require){
 
 	return {
 		searchConnections : searchConnections,
-		getConnectionById : getConnectionById
+		getConnectionById : getConnectionById,
+		getAllConnectionsForProfile: getConnectionsForProfile
 	};
 });

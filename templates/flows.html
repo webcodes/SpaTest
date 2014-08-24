@@ -3,21 +3,27 @@
 <table>
 		<thead>
 			<tr>
+				<th>Asset Class</th>
+				<th>Channel</th>
 				<th>Sender Comp</th>
-				<th>Network</th>
 				<th>EMS/OMS</th>
-				<th>Obo</th>
+				<th>Cust ID</th>
+				<th>Region</th>
+				<th>Country</th>
 				<th></th>
 			</tr>
 		</thead>
-		<!-- <tbody data-bind="foreach: flows">
+		<tbody data-bind="foreach: flows">
 		<tr>
+			<td data-bind="text: assetclass"></td>
+			<td data-bind="text: channel"></td>
 			<td data-bind="text: sendercomp"></td>
-			<td data-bind="text: network"></td>
 			<td data-bind="text: platform"></td>
-			<td data-bind="text: obo"></td>
+			<td data-bind="text: custid"></td>
+			<td data-bind="text: region"></td>
+			<td data-bind="text: country"></td>
 			<td><button>Edit</button></td>
 		</tr>
-		</tbody> -->
+		</tbody>
 	</table>
 </section>

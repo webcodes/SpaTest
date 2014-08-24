@@ -67,26 +67,7 @@ input.searchfield:focus {
     background-color: rgb(52,49,49);
     display:inline-block;
 }
-.sidebar {
-	cursor: pointer;
-	display: inline-block;
-	min-width: 150px;
-	max-width: 150px;
-	color: #b3b3b3;
-}
-.sidebar ul li {
-	padding: 10px 20px;
-}
-.sidebar ul li:hover {
-	background-color: rgb(78,74,74);
-}
-.sidebar ul li a, .sidebar ul li a:link, .sidebar ul li a:visited, .sidebar ul li a:hover, .sidebar ul li a:active {
-	display: inline-block;
-	padding: .2em;
-	font-size: 90%;
-	text-decoration: none;
-	color: #b3b3b3;
-}
+
 .contents {
 	max-width: 1400px;
 	min-width: 1000px;
@@ -104,6 +85,7 @@ input.searchfield:focus {
 	cursor: pointer;
 	color: #b3b3b3;
 	background-color: rgb(52,49,49);
+	clear:both;
 }
 .topbar ul li {
 	padding: 10px 20px;
@@ -122,6 +104,8 @@ input.searchfield:focus {
 	text-decoration: none;
 	color: #b3b3b3;
 }
+
+
 .content-section {
     background-color: rgb(52,49,49);
 }
@@ -274,9 +258,59 @@ input.searchfield:focus {
 	display: inline-block;
 	padding: 5px;
 }
-
+.float-right {
+	float : right;
+}
+.float-right:after {
+	content:'';
+    display:block;
+    clear: both;
+}
 .list-container {
 	border:1px solid #aaa;
 	min-width:800px;
 	display: inline-block;
+}
+
+.sticky-sidebar {
+	cursor: pointer;
+	display: inline-block;
+	min-width: 100px;
+	max-width: 150px;
+	color: #b3b3b3;
+	background-color: rgb(52,49,49);
+	position: fixed;
+	top: 100px;
+	left:0;
+	z-index: 9999;
+}
+.sticky-sidebar  ul li {
+	padding: 10px 20px;
+}
+.sticky-sidebar  ul li:hover {
+	background-color: rgb(78,74,74);
+}
+.sticky-sidebar  ul li a, .sticky-sidebar ul li a:link, .sticky-sidebar ul li a:visited, .sticky-sidebar ul li a:hover, .sticky-sidebar ul li a:active {
+	display: inline-block;
+	padding: .2em;
+	font-size: 90%;
+	text-decoration: none;
+	color: #b3b3b3;
+}
+.inline-contents {
+	position: absolute;
+	left: 150px;
+	top:100px;
+	border:1px solid rgb(200,200,200);
+	padding:10px;
+}
+
+.component-container {
+	padding: 10px;
+}
+
+.clearfix {
+	clear:both;
+	content: '';
+	display:block;
 }

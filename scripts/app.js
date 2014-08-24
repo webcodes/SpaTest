@@ -15,6 +15,7 @@ define(['plugins/router'], function(Router) {
 		ko.components.register('profile', {require : 'components/profile'});
 		ko.components.register('searchresults', {require : 'components/searchresults'});
 		ko.components.register('reports', {require : 'components/reports'});
+		ko.components.register('connections', {require : 'components/connections'});
 		ko.components.register('flows', {require : 'components/flows'});
   	};
 
@@ -26,28 +27,24 @@ define(['plugins/router'], function(Router) {
   		rootRouter.mapRoutes(
 			[
 				//note: there are no routes registered for non hash routes (or external htmls.)
-
 				['get', '#/reports', function() {
-					console.log(this.path);
 					vm.componentName("reports");
 				}],
 				['get', '#/search/:key', function() {
-					console.log(this.path); 
 					var searchKey = this.params.key;
 					vm.searchItem(searchKey);
 					vm.componentParams = {"search" : vm.searchItem};
 					vm.componentName("searchresults");
 				}],
 
-				['get', '/#\/profile\/:id(\/)*/', function() {
-					console.log(this.path);
-					var profileId = this.params.id;
+				['get', /#\/profile\/(\d+)(\/)*/, function() {
+					var profileId = this.params.splat[0];
 					vm.componentParams = {"id" : profileId};
 					vm.componentName("profile");
-				}],
+					this.trigger('loadprofilecomponents');
+				}],	
 
 				['get', '#/', function() {
-					console.log(this.path);
 					vm.componentName("recentprofiles");
 				}]
 			]
@@ -61,10 +58,11 @@ define(['plugins/router'], function(Router) {
 	    }
   	});
 
-  	var spapp = (function() {
+  	var App = function() {
 		var self = this;
 		this.searchItem = ko.observable();
 		this.componentName = ko.observable();
+		this.componentsToLoad = ko.observableArray();
 		this.loadComponent = ko.computed(function() {
 			return self.componentName() && self.componentName().length > 0;
 		});
@@ -77,7 +75,7 @@ define(['plugins/router'], function(Router) {
 		};
 		registerKoComponents();
 		setupRouting(self);
-  	})();
+  	};
 
-	ko.applyBindings(spapp);
+	ko.applyBindings(new App());
 });

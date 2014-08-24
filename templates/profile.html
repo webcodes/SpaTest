@@ -2,39 +2,35 @@
 	<div class="float-right"><button data-bind="click: goBack">Back</button></div>
 	<!-- ko if: profileVm -->
 	
-	<div data-bind="with: profileVm">
-		<label for="legalName">Client Name: </label>
-		<input type ="text" id="legalName" data-bind="value: legalName"/>
-
-		<label for="ips">IPS : </label>
-		<input type ="text" id="ips" data-bind="value: ips"/>
-		
-		<label for="segmentation">Segmentation : </label>
-		<input type ="text" id="segmentation" data-bind="value: segmentation"/>
-
-		<label for="coper">Coper: </label>
-		<input type ="text" id="coper" data-bind="value: coper"/>
-		<div>
-			<button data-bind="click: $parent.save">Save</button>	
-		</div>
+	<div class="sticky-sidebar">
+		<ul data-bind="foreach:navLinks">
+			<li><a data-bind="text: title, attr: {href: link}"></a></li>	
+		</ul>
 	</div>
-	<!-- /ko -->
-	
-	<div id = "profileRoot">
+	<div class="inline-contents">
+		<div data-bind="with: profileVm">
+			<label for="legalName">Client Name: </label>
+			<input type ="text" id="legalName" data-bind="value: legalName"/>
+
+			<label for="ips">IPS : </label>
+			<input type ="text" id="ips" data-bind="value: ips"/>
+			
+			<label for="segmentation">Segmentation : </label>
+			<input type ="text" id="segmentation" data-bind="value: segmentation"/>
+
+			<label for="coper">Coper: </label>
+			<input type ="text" id="coper" data-bind="value: coper"/>
+			<div>
+				<button data-bind="click: $parent.save">Save</button>	
+			</div>
+		</div>
 		<!-- ko foreach: componentsToLoad -->
-			<div data-bind="component: {
+			<div class="component-container" data-bind="component: {
 					name: componentName,
 					params: componentParams
 			}"></div>
 		<!-- /ko -->
-	</div>
+		</div>	
+	<!-- /ko -->	
+	
 </section>
-
-
-	<script>
-		$(function(){
-			console.log("JQuery and DOM is loaded within el.");
-			var router = $("#profileRoot").data();
-			router.activate("#/");
-		});
-	</script>
