@@ -21,6 +21,24 @@ define(["server/flowRepository", "text!templates/flows.html", "utils/uiutils"], 
 		self.flows(flatFlows);
 	};
 
+	var createFlowModel = function(flow) {
+		flow = flow || {};
+		var self = this;
+		var flatFlow = {
+				"id" : flow.id, 
+				"sendercomp" : flow.session.sendercomp,
+				"platform" : flow.session.platform.name,
+				"assetclass" : flow.assetclass,
+				"channel" : flow.channel,
+				"custid" : flow.custid,
+				"region" : flow.region,
+				"country" : flow.country,
+				"status" : flow.status,
+				"statusClass" : flow.status.toLowerCase()
+			};
+		self.flows.push(flatFlow);
+	};
+
 	var vm = function(param) {
 		var self = this;
 		var params = ko.unwrap(param);
@@ -32,6 +50,14 @@ define(["server/flowRepository", "text!templates/flows.html", "utils/uiutils"], 
 		}
 		this.detailsMode = ko.observable(false);
 		this.flows = ko.observableArray([]);
+		this.profileId = profileId;
+		//add a variable to subscribe for a change (modify/new) flow from editor
+		this.modifiedId = ko.observable();
+		ko.computed(function() {
+			var modId = ko.unwrap(self.modifiedId);
+			repository.getFlowById(modId)
+			.done(createFlowModel.bind(self));
+		});
 		repository.getAllFlowsForProfile(profileId).done(createViewModel.bind(this));
 
 		this.editFlow = function() {

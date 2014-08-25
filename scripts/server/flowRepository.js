@@ -1,7 +1,7 @@
 define(function(require) {
 	var stringUtils = require("utils/stringutils");
 	var localDb = require('server/localDb');
-	
+	var id = 10;
 	var firstOrDefault = function (flows, flowId) {
 		var matches = $.grep(flows, function(value, index) {
 			return value.id === flowId;
@@ -79,6 +79,31 @@ define(function(require) {
 		}
 	};
 
+	var incrementId = function() {
+		return id++;
+	};
+
+	var addFlow = function(profileId, flow) {
+		var deferred = new $.Deferred();
+		var key = "profile-flows-" + profileId;
+		try{
+			flow.id = incrementId();
+			var singleKey = "flow-" + flow.id;
+			var flows = localDb.getItem(key);
+			if (flows) {
+				flows.push(flow);
+				localDb.setItem(key, flows);
+				localDb.setItem(singleKey, flow);
+				return deferred.resolve(flow);
+			}
+		}
+		catch(ex) {
+			console.log(stringUtils.format("An error occured, {0}", ex) );
+			return deferred.reject(ex);
+		}
+		return deferred.promise();	
+	};
+
 	var getAllRegions = function() {
 		var deferred = new $.Deferred();
 		deferred.resolve(["AMRS", "EMEA", "APAC"]);
@@ -119,6 +144,7 @@ define(function(require) {
 		getFlowById : getFlowById,
 		getAllRegions : getAllRegions,
 		getAllCountriesWithRegion : getAllCountriesWithRegion,
-		getAllAssetClassWithRegionAndCountry : getAllAssetClassWithRegionAndCountry
+		getAllAssetClassWithRegionAndCountry : getAllAssetClassWithRegionAndCountry,
+		addNewFlow: addFlow
 	};
 });

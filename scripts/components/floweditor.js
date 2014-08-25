@@ -39,7 +39,11 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 		var self = this;
 		var params = ko.unwrap(param);
 		var flowId = ko.unwrap(params.id);
+		
+		this.profileId = ko.unwrap(params.profileId);
 		this.detailsMode = params.mode;	///parent observable
+		this.modId = params.modId;	//do not unwrap. Just get the observable that needs to be set when saved.
+
 		flowId = Number(flowId, 10);
 		if (isNaN(flowId)) {
 			uiUtils.showError("The flow id supplied is not a valid number.");
@@ -76,7 +80,20 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 		};
 		this.save = function() {
 			//TODO
+			console.log(self.flow);
+			var flowModel = ko.viewmodel.toModel(self.flow);
+			console.log(flowModel);
+			repository.addNewFlow(self.profileId, flowModel)
+			.done(function(savedFlow) {
+				//set the parent observable which is being subscribed in the parent as well
+				self.modId(savedFlow.id);
+				self.detailsMode(false);
+			})
+			.fail(function() {
+				uiUtils.showError(stringUtils.format("An error occured - {0}", ex));
+			});
 		};
+
 		this.cancel = function() {
 			self.detailsMode(false);
 		};
