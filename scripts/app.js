@@ -8,7 +8,7 @@ requirejs.config({
 		//"toastr" : "//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min"
 	}
 });
-define(['plugins/router'], function(Router) {
+define(['plugins/router', 'utils/uiutils'], function(Router, ui) {
 
   	var registerKoComponents = function() {
   		ko.components.register('recentprofiles', {require : 'components/recentprofiles'});
@@ -78,6 +78,27 @@ define(['plugins/router'], function(Router) {
 			console.log(searchField);
 			location.hash = "/search/" + searchField;
 		};
+		var count = 1;
+		this.msg = ko.observable();
+		this.createSuccess = function() {
+			var msg = self.msg() || "A new message ";
+			msg += count;
+			count++;
+			ui.showSuccess(msg);	
+		};
+		this.createError = function() {
+			var msg = self.msg() || "A new message ";
+			msg += count;
+			count++;
+			ui.showError(msg);	
+		};
+		this.createMessage = function() {
+			var msg = self.msg() || "A new message ";
+			msg += count;
+			count++;
+			ui.showMessage("info", msg);	
+		};
+
 		registerKoComponents();
 		setupRouting(self);
   	};

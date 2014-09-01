@@ -4,25 +4,23 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-
 	<title>Test SPA</title>
 	<link rel="stylesheet" type="text/css" href="contents/site.css">
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" >
-	<!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic" > -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
 
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/knockout-3.2.0.js"></script>
-	<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script> -->
-	<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script> -->
 	
 </head>
 <body>
 	<section id="header">
+		<a href="#/" class="logo"></a>
 		<a href="#/"><h1>Spa Test</h1></a>
-		<div class="brand"></div>
 		<div class="searchbar">
 			<form data-bind="submit:search">
 			<input type="search" name="searchfield" class="searchfield" placeholder ="search for profile fields" autofocus />
@@ -38,12 +36,6 @@
 				<li><i class="fa fa-book" style="color:#ccc;"></i><a href="#/reports">Component Reports</a></li>
 			</ul>
 		</nav>
-		<div>
-			<button data-bind="click: createSuccess">Success</button>
-			<button data-bind="click: createError">Error</button>
-			<button data-bind="click: createMessage">Message</button>
-			<input type ="text" data-bind="value: msg" />
-		</div>
 		<div class="contents"  id="appRoot">
 			<!-- ko if: loadComponent -->
 			<div class="component-container" data-bind="component: {
@@ -56,6 +48,8 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.4/sammy.min.js"></script>
 	<script type="text/javascript" src="lib/ko-postbox.min.js"></script>
 	<script type="text/javascript" src="lib/knockout.viewmodel.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js" data-main="scripts/app"></script>
 </body>
 </html>

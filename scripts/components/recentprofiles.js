@@ -1,4 +1,4 @@
-define(["server/profileRepository", "text!templates/recentprofiles.html", "ko/knockout.viewmodel.min"], function(repository, template, komapper){
+define(["server/profileRepository", "text!templates/recentprofiles_div.html", "ko/knockout.viewmodel.min"], function(repository, template, komapper){
 	var setProfiles = function(profiles){
 		profiles = profiles || [];
 		var self = this;

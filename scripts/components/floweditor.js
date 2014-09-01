@@ -89,7 +89,7 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 				self.modId(savedFlow.id);
 				self.detailsMode(false);
 			})
-			.fail(function() {
+			.fail(function(ex) {
 				uiUtils.showError(stringUtils.format("An error occured - {0}", ex));
 			});
 		};
