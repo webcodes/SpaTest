@@ -1,11 +1,10 @@
 requirejs.config({
 	paths: {
-		"text" : "//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min",
+		"text" : "../lib/text.2.0.12.min",
 		"ko" : "../lib",
 		"templates" : "../templates",
 		"fixtures" : "../fixtures",
 		"plugins" : "./plugins"
-		//"toastr" : "//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min"
 	}
 });
 define(['plugins/router', 'utils/uiutils'], function(Router, ui) {
