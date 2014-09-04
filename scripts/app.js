@@ -1,6 +1,6 @@
 requirejs.config({
 	paths: {
-		"text" : "../lib/text.2.0.12.min",
+		"text" : "../lib/text-2.0.12.min",
 		"ko" : "../lib",
 		"templates" : "../templates",
 		"fixtures" : "../fixtures",

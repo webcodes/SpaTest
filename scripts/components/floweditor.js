@@ -107,7 +107,11 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 
 		this.postbox = (function() {
 			var notifier = ko.observable();
+			var eventRegister = ["acrcchanged", "custidchanged"];
 			var publish = function(topic, newValue) {
+				if (!hasTopic(topic)) {
+					eventRegister.push(topic);
+				}
 				notifier.notifySubscribers(newValue, topic);
 			};
 			var subscribe = function(topic, callback, target) {
@@ -116,9 +120,15 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 					callback.call(this, newValue);
 				}, target, topic);
 			};
+
+			var hasTopic = function(topicName) {
+				return eventRegister.indexOf(topicName) !== -1;
+			};
+
 			return {
 				publish: publish,
-				subscribe : subscribe
+				subscribe : subscribe,
+				hasTopic : hasTopic
 			};
 		})();
 		

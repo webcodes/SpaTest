@@ -269,12 +269,14 @@ input.searchfield:focus {
 	left: 10px;
 	top: 0;
 	width:100%;
+	z-index: 1000;
 }
 .xemsgr-bottom-full {
 	position: fixed;
 	left: 10px;
 	bottom: 0;
 	width:100%;
+	z-index: 1000;
 }
 .xemsgr-success, .xemsgr-error, .xemsgr-info {
 	width:95%;
@@ -370,7 +372,7 @@ input.searchfield:focus {
 	background-color: rgba(248, 248, 248, 0.97);
 	width: 100%;
 	min-height: 600px;
-	z-index: 99999;
+	z-index: 999;
 	font-size:.8em !important;
 }
 .translucent {
