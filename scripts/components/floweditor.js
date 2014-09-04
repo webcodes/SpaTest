@@ -3,6 +3,11 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 		flow = flow || {};
 		var self = this;
 		self.flow = ko.viewmodel.fromModel(flow);
+		self.compVm = {
+			custid : self.flow.custid,
+			umirid : self.flow.umirid,
+			bovespaid : self.flow.bovespaid
+		};
 		ko.computed(function() {
 			//set up dependency on selected region and also the original master list that might yet be loading async
 			var region = ko.unwrap(self.flow.region);
@@ -78,6 +83,8 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 			var viewText = self.view() === "background" ? "foreground" : "background"
 			self.view(viewText);
 		};
+
+
 		this.save = function() {
 			//TODO
 			console.log(self.flow);
@@ -97,6 +104,32 @@ define(["server/flowRepository", "text!templates/floweditor.html", "utils/uiutil
 		this.cancel = function() {
 			self.detailsMode(false);
 		};
+
+		this.postbox = (function() {
+			var notifier = ko.observable();
+			var publish = function(topic, newValue) {
+				notifier.notifySubscribers(newValue, topic);
+			};
+			var subscribe = function(topic, callback, target) {
+				target = target || this;
+				notifier.subscribe(function(newValue) {
+					callback.call(this, newValue);
+				}, target, topic);
+			};
+			return {
+				publish: publish,
+				subscribe : subscribe
+			};
+		})();
+		
+
+
+		ko.computed(function() {
+			var region = ko.unwrap(self.flow.region);
+			var country = ko.unwrap(self.flow.country);
+			var ac = ko.unwrap(self.flow.assetclass);
+			self.postbox.publish("acrcchanged", {region: region, ac: ac, country : country});
+		});
 
 		this.dispose = function(){
 			//TODO

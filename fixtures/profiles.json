@@ -4,7 +4,7 @@
 		"segmentation": "seg-one",
 		"ips" : "ips-one",
 		"coper" : "coper-one",
-		"legalName" : "Client-One Ltd."
+		"legalName" : "Client-One Is a Long Name Indeed a very long name Ltd."
 		
 	},
 	{
@@ -12,11 +12,84 @@
 		"segmentation": "seg-two",
 		"ips" : "ips-two",
 		"coper" : "coper-two",
-		"legalName" : "Client-Two Ltd."
+		"legalName" : "CLIENT TWO IS UPPERCASE LTD."
 		
 	},
 	{
 		"id" : 3,
+		"segmentation": "seg-three",
+		"ips" : "ips-three",
+		"coper" : "coper-three",
+		"legalName" : "Client-Three Ltd."
+		
+	},
+	{
+		"id" : 4,
+		"segmentation": "seg-one",
+		"ips" : "ips-one",
+		"coper" : "coper-one",
+		"legalName" : "Client-One Is a Long Name Indeed a very long name Ltd."
+		
+	},
+	{
+		"id" : 5,
+		"segmentation": "seg-two",
+		"ips" : "ips-two",
+		"coper" : "coper-two",
+		"legalName" : "CLIENT TWO IS UPPERCASE LTD."
+		
+	},
+	{
+		"id" : 6,
+		"segmentation": "seg-three",
+		"ips" : "ips-three",
+		"coper" : "coper-three",
+		"legalName" : "Client-Three Ltd."
+		
+	},
+	{
+		"id" : 7,
+		"segmentation": "seg-one",
+		"ips" : "ips-one",
+		"coper" : "coper-one",
+		"legalName" : "Client-One Is a Long Name Indeed a very long name Ltd."
+		
+	},
+	{
+		"id" : 8,
+		"segmentation": "seg-two",
+		"ips" : "ips-two",
+		"coper" : "coper-two",
+		"legalName" : "CLIENT TWO IS UPPERCASE LTD."
+		
+	},
+	{
+		"id" : 9,
+		"segmentation": "seg-three",
+		"ips" : "ips-three",
+		"coper" : "coper-three",
+		"legalName" : "Client-Three Ltd."
+		
+	}
+	,
+	{
+		"id" : 10,
+		"segmentation": "seg-one",
+		"ips" : "ips-one",
+		"coper" : "coper-one",
+		"legalName" : "Client-One Is a Long Name Indeed a very long name Ltd."
+		
+	},
+	{
+		"id" : 11,
+		"segmentation": "seg-two",
+		"ips" : "ips-two",
+		"coper" : "coper-two",
+		"legalName" : "CLIENT TWO IS UPPERCASE LTD."
+		
+	},
+	{
+		"id" : 12,
 		"segmentation": "seg-three",
 		"ips" : "ips-three",
 		"coper" : "coper-three",

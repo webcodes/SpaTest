@@ -37,7 +37,9 @@ define(['plugins/router'], function(Router) {
 					var searchKey = this.params.key;
 					vm.previous = this.app.getLocation();
 					vm.searchItem(searchKey);
-					vm.componentParams = {"search" : vm.searchItem};
+					console.log("Publishing Search Key " + searchKey)
+					vm.publish("searchKey", searchKey);
+					vm.componentParams = {"search" : vm.searchItem(), "postbox" : {"publish" : vm.publish, "subscribe" : vm.subscribe}};
 					vm.componentName("searchresults");
 				}],
 
@@ -72,6 +74,7 @@ define(['plugins/router'], function(Router) {
 			return self.componentName() && self.componentName().length > 0;
 		});
 		this.componentParams = {};
+		this.notifier = ko.observable();
   		this.search = function(searchform) {
 			//you get back the form
 			var searchField = $(searchform).find(".searchfield").val();
@@ -79,6 +82,19 @@ define(['plugins/router'], function(Router) {
 			location.hash = "/search/" + searchField;
 		};
 		registerKoComponents();
+
+		this.publish = function(topic, newValue) {
+			self.notifier.notifySubscribers(newValue, topic);
+		};
+
+		this.subscribe = function(topic, callback, target) {
+			self.notifier.subscribe(function(newValue) {
+				callback.call(this, newValue);
+			}, target, topic);
+
+			// self.notifier.subscribe(callback.bind(target)(), null, topic);
+		};
+
 		setupRouting(self);
   	};
 

@@ -37,10 +37,20 @@ define(['server/profileRepository', 'server/connectionRepository', 'text!templat
 		var self = this;
 		var searchParams = ko.unwrap(params);
 		var searchValue = searchParams && ko.unwrap(searchParams.search);
+
+		var postbox = searchParams && ko.unwrap(searchParams.postbox);
+		postbox.subscribe("searchKey", function(newValue){
+			console.log("the new value is " + newValue);
+			if(newValue) {
+					$.when(profileRepo.searchProfiles(newValue), connRepo.searchConnections(newValue))
+					.done(setResults.bind(self));
+				}
+		});
+
 		this.tabs = ['Profiles', 'Connections'];
 		this.visibleTab = ko.observable('Profiles');
 		this.searching = ko.observable(true);
-		subscribeToSearchParameterChange(searchParams,self);
+		//subscribeToSearchParameterChange(searchParams,self);
 		this.searchResults = ko.observable();
 		this.hasResults = ko.computed(function() {
 			var result = ko.unwrap(self.searchResults);

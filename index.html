@@ -18,8 +18,8 @@
 </head>
 <body>
 	<section id="header">
-		<a href="#/" class="logo"></a>
-		<a href="#/"><h1>Spa Test</h1></a>
+		<a href="#/"><h1>Client Setup</h1></a>
+		<div class="brand"></div>
 		<div class="searchbar">
 			<form data-bind="submit:search">
 			<input type="search" name="searchfield" class="searchfield" placeholder ="search for profile fields" autofocus />
@@ -35,6 +35,7 @@
 				<li><i class="fa fa-book" style="color:#ccc;"></i><a href="#/reports">Component Reports</a></li>
 			</ul>
 		</nav>
+		<!-- <searchresults params="{'search' : searchItem}"></searchresults> -->
 		<div class="contents"  id="appRoot">
 			<!-- ko if: loadComponent -->
 			<div class="component-container" data-bind="component: {
