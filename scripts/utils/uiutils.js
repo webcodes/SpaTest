@@ -1,5 +1,6 @@
 define(function(require){
 	var stringUtil = require("utils/stringutils");
+	var offset;
 	var msgClassMap = [
 			{type: "success", cssclass: "xemsgr-success"},
 			{type: "error", cssclass: "xemsgr-error"},
@@ -11,21 +12,40 @@ define(function(require){
 		});
 		match = (match && match.length > 0) ? match[0].cssclass : "";
 		
+		//can be more than one message at a time.stack them
+		var $msgArray = $("[id^='msg-container']");
+		var msgIndex = $msgArray.length;
+		var stackPosition = '';
+		if(msgIndex) {
+			offset = offset || 0;
+			var latestMsgEl = $($msgArray[msgIndex-1]);
+			offset = offset + latestMsgEl.height();
+			//var position = latestMsgEl.css("position");
+			if (/xemsgr-top/.test(options.positionClass)) {
+				stackPosition = "style=top:" + offset + 'px';
+			}
+			else {
+				stackPosition = "style=bottom:" + offset + 'px';
+			}
+		}
 		var msgEl = stringUtil.format("<div class='xemsgr-msg'>{0}</div>", msg);
 		var msgCloseEl = options.closeButton ? "<button class='xemsgr-close-button'>×</button>" : "";
-		var msgwrapper = stringUtil.format("<div id='msg-container' class='{3}'><div class= '{0}'>{1}{2}</div></div>", [match,msgCloseEl,msgEl, options.positionClass ]);
+		var msgwrapper = stringUtil.format("<div id='msg-container-{4}' class='{3}' {5}><div class= '{0}'>{1}{2}</div></div>", [match,msgCloseEl,msgEl, options.positionClass, msgIndex, stackPosition ]);
+		
 		$(msgwrapper).appendTo($(document.body))
 		.fadeIn(options.showDuration, function() {
 			//set up event handler for close
 			$(".xemsgr-close-button").click(function() {
-				var container = $("#msg-container");
+				var container = $(this).parents("[id^='msg-container']");
 				container.stop(true, true);
+				offset = offset - container.height();
 				container.remove();
 			});
 		})
 		.delay(options.timeOut)
 		.fadeOut(options.hideDuration, function(){
-		 	$("#msg-container").remove();
+		 	offset = offset - $(this).height();
+		 	$(this).remove();
 		});
 	};
 
@@ -36,11 +56,12 @@ define(function(require){
 		showMessage("success", msg, options);
 	}
 	var showMessage = function(msgType, msg, options) {
-		if (!msg)
+		if (!msg) {
 			return;
+		}
 		var defaultOptions = {
 			"closeButton": true,
-			"positionClass": "xemsgr-top-full",
+			"positionClass": "xemsgr-bottom-full",
 			"showDuration": "300",
 			"hideDuration": "1000",
 			"timeOut": "4000"

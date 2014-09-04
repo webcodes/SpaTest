@@ -1,8 +1,9 @@
 body {
 	background: rgba(0,0,0,0.05);
 	margin:0;
-	font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
-	font-weight: normal;
+	/*font-family: 'Lato', Arial,sans-serif !important;*/
+	font-family: 'Open Sans', Arial,sans-serif !important;
+	font-size: .9em;
 }
 ul, ol, dl {
 	margin: 0;
@@ -12,8 +13,8 @@ ul, ol, dl {
 }
 #header {
 	font-weight: bold;
-	background-color: #2980b9;
-	color:#fff;
+	background-color: rgba(84, 84, 84, 0.71);
+	/*color:#fff;*/
 }
 #header .logo, #header .logo_1{
 	background-image: url(images/logo.png);
@@ -23,18 +24,23 @@ ul, ol, dl {
 	background-repeat: no-repeat;
 	background-size: 100% auto;
 }
-#header .logo_1 {
-	background-image: url(images/logo_1.png);
-}
+
 
 #header h1 {
 	display: inline-block;
 	padding: 10px;
 	margin: 0;
 	vertical-align: top;
+	font-size:2em;
+}
+#header .brand {
+	background-image: url(images/brand.png);
+	width: 156px;
+	height: 50px;
+	display:inline-block;
 }
 #header a:link, #header a:visited, #header a:hover, #header a:active{
-	color:#fff;
+	color:#000;
 	text-decoration: none;
 }
 
@@ -192,12 +198,10 @@ input.searchfield:focus {
 	/*border: 1px solid #448BB9;
 	background-color: #2F8DCA;
 	color: #fff; */
-	border: 1px solid #0076C5;
-	background-color: #137FC7;
-	font-size: 0.8em;
-	padding: .4em;
-	border-radius: 2px;
-	color: #fff;
+	border: 1px solid #D8D8D8;
+	background-color: #ECECEC;
+	padding: .4em .8em;
+	border-radius: 4px;
 	cursor: pointer;
 }
 .contents button:active {
@@ -207,12 +211,18 @@ input.searchfield:focus {
 .contents button:focus {
 	outline:none;
 }
-
+.contents button:hover {
+	background-color: #B3B3B3;
+}
 .contents input[type="checkbox"] + label, .contents input[type="radio"] + label {
  	cursor: pointer;
 }
 .contents input[type="checkbox"]:checked + label, .contents input[type="radio"]:checked + label {
  	background-color: #EAF6FC;
+}
+.contents table {
+	table-layout: fixed;
+	width:90%;
 }
 .contents table,  .contents table td{
 	border: none;
@@ -223,9 +233,12 @@ input.searchfield:focus {
 	 	padding:.5em;
 	 	font-size:.9em;
 	 	text-align: left;
+	 	overflow-x: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	 }
 	 .contents table th{
-	 	background-color: #C0D2E4;
+	 	background-color: rgba(78,74,74,.5);
 	 }
 
 /* *** Contents Form Styling *** */
@@ -260,23 +273,26 @@ input.searchfield:focus {
 .xemsgr-bottom-full {
 	position: fixed;
 	left: 10px;
-	bottom: 10px;
+	bottom: 0;
 	width:100%;
 }
 .xemsgr-success, .xemsgr-error, .xemsgr-info {
 	width:95%;
 	opacity: .85;
 	padding: .5em;
-	border-radius: 2px;
+	border-radius: 4px;
 }
 .xemsgr-success {
-	background-color:  rgba(156, 244, 156, 0.85);
+	background-color:  rgba(102, 187, 102, 0.72);
+	border: 1px solid rgba(102, 187, 102, 1);
 }
 .xemsgr-error {
 	background-color: rgba(193,56,50,0.85);
+	border: 1px solid rgba(193,56,50,0.85);
 }
 .xemsgr-info {
 	background-color: rgba(43, 120, 192, 0.85);
+	border: 1px solid rgba(43, 120, 192,1);
 }
 .xemsgr-close-button {
 	padding: 0;
@@ -385,4 +401,40 @@ div.row .col-width-100 {
 div.bordered-div {
 	border:1px solid#b3b3b3;
 	margin-top:.1em;
+}
+
+div.thead-sim {
+/*width:90%*/
+	display: inline-block;
+}
+div.th-sim-200, div.td-sim-200, div.th-sim-400, div.td-sim-400 {
+	display: inline-block;
+	width:200px;
+	padding:10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow-x: hidden;
+	margin:-2px;
+	border-bottom:1px solid #aaa;
+	font-size: .9em;
+}
+div.td-sim-400, div.th-sim-400 {
+	width:400px;
+}
+
+div.th-sim-200, div.th-sim-400 {
+	background-color: #ccc;
+	font-weight:bold;
+}
+
+div.tbody-sim {
+	overflow-y: auto;
+	max-height: 100px;
+}
+div.tr-sim {
+	margin:-2px;
+	display: inline-block;
+}
+div.tr-sim:nth-child(even) {
+	background-color:#F7F7F7;
 }

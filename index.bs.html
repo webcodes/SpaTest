@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Test SPA</title>
+	<link rel="stylesheet" type="text/css" href="contents/site.css">
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/knockout-3.2.0.js"></script>
+	
+</head>
+<body>
+	<section id="header">
+		<a href="#/" class="logo"></a>
+		<a href="#/"><h1>Spa Test</h1></a>
+		<div class="searchbar">
+			<form data-bind="submit:search">
+			<input type="search" name="searchfield" class="searchfield" placeholder ="search for profile fields" autofocus />
+			<input type="submit" value="search"/>
+			</form>
+		</div>
+	</section>
+	<section id="content-section">
+		<nav class="topbar">
+			<ul>
+				<li><i class="fa fa-home" style="color:#ccc;"></i><a href="#/">Static Home</a></li>
+				<li><i class="fa fa-question-circle" style="color:#ccc;"></i><a href="/faq.html">External FAQ</a></li>
+				<li><i class="fa fa-book" style="color:#ccc;"></i><a href="#/reports">Component Reports</a></li>
+			</ul>
+		</nav>
+		<div class="contents"  id="appRoot">
+			<!-- ko if: loadComponent -->
+			<div class="component-container" data-bind="component: {
+					name: componentName,
+					params: componentParams
+			}"></div>
+			<!-- /ko -->
+		</div>
+	</section>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.4/sammy.min.js"></script>
+	<script type="text/javascript" src="lib/ko-postbox.min.js"></script>
+	<script type="text/javascript" src="lib/knockout.viewmodel.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js" data-main="scripts/app"></script>
+</body>
+</html>

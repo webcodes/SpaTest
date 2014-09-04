@@ -1,0 +1,23 @@
+<section name="profiles">
+	<h4>Recently visited profiles<button><i class="fa fa-refresh"></i></h4>
+	<div data-bind="if: hasProfiles">
+		<div class="thead-sim">
+			<div class="th-sim-200">IPS <i class="fa fa-sort"></i></div>
+			<div class="th-sim-200">Coper</div>
+			<div class="th-sim-400">Client Name</div>
+			<div class="th-sim-200">Segmentation</div>
+			<div class="th-sim-200">Actions</button>
+			</div>
+		</div>
+		<div class="tbody-sim" data-bind="foreach: recentProfiles">
+			<div class="tr-sim">
+				<div class="td-sim-200" data-bind="text:ips"></div>
+				<div class="td-sim-200" data-bind="text:coper"></div>
+				<div class="td-sim-400" data-bind="text:legalName"></div>
+				<div class="td-sim-200" data-bind="text:segmentation"></div>
+				<div class="td-sim-200"><button data-bind="click: $parent.showProfile">View</button></div>
+			</div>
+		</div>
+	</div>
+	<p data-bind="ifnot: hasProfiles">You haven't recently visited any profiles. Search for one in the top search bar.</p>
+</section>
